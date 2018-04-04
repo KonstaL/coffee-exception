@@ -1,5 +1,7 @@
 package fi.tinsta.coffee_exception;
 
+import com.thedeanda.lorem.Lorem;
+import com.thedeanda.lorem.LoremIpsum;
 import fi.tinsta.coffee_exception.data.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -44,5 +46,17 @@ public class MyRestController implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        Lorem lorem = new LoremIpsum();
+
+        for (int i = 0; i < 10; i++) {
+            List<String> items = new ArrayList<>();
+            for (int b = 0; b < ((int) (Math.random()*7)); b++) {
+                items.add(lorem.getParagraphs(1, 5));
+            }
+
+            BlogPost blogPost = new BlogPost(lorem.getTitle(1), new Author(lorem.getName()),items);
+            blogPostRepository.save(blogPost);
+        }
+
     }
 }

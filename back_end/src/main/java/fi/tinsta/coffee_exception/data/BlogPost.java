@@ -20,6 +20,7 @@ public class BlogPost {
 
 
     @ElementCollection
+    @Column(columnDefinition = "TEXT")
     private List<String> bodyItems;
 
     public BlogPost(String title, Author author, List<String> bodyItems) {
