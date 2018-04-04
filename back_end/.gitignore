@@ -39,4 +39,8 @@ atlassian-ide-plugin.xml
 .gradletasknamecache
 
 # sensitive data
-src\main\resources\application.properties
+src\main\resources\application.properties
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

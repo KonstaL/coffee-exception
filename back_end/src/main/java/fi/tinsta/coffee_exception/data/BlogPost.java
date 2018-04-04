@@ -12,10 +12,14 @@ public class BlogPost {
     @GeneratedValue
     private int id;
 
+    @Column(nullable = false)
     private String title;
+
+    @Column(nullable = false)
     private LocalDate date;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
+    @JoinColumn(name="author_id")
     private Author author;
 
 

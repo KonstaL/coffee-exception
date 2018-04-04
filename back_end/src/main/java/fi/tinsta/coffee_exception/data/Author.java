@@ -1,31 +1,33 @@
 package fi.tinsta.coffee_exception.data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Author {
 
     @Id
     @GeneratedValue
-    private int authorId;
+    private int id;
 
+    @Column(nullable = false)
     private String userName;
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    private List<BlogPost> blogPosts;
 
     public Author(String userName) {
         this.userName = userName;
     }
 
-    public Author() {
+    public Author() {}
 
-    }
-    public int getAuthorId() {
-        return authorId;
+    public int getId() {
+        return id;
     }
 
-    public void setAuthorId(int authorId) {
-        this.authorId = authorId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUserName() {
@@ -34,5 +36,13 @@ public class Author {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public List<BlogPost> getBlogPosts() {
+        return blogPosts;
+    }
+
+    public void setBlogPosts(List<BlogPost> blogPosts) {
+        this.blogPosts = blogPosts;
     }
 }
