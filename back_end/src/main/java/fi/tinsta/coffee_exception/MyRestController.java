@@ -1,0 +1,13 @@
+package fi.tinsta.coffee_exception;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class MyRestController {
+
+    @RequestMapping("/")
+    public String test() {
+        return "Onnittelut bäkkärin toiminnasta!";
+    }
+}
