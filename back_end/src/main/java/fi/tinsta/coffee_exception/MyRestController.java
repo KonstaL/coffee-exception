@@ -86,31 +86,38 @@ public class MyRestController implements CommandLineRunner {
     public ResponseEntity<Iterable<Author>> findAllAuthors() {
         return new ResponseEntity<>(authorRepository.findAll(), HttpStatus.OK);
     }
-//
-//    @RequestMapping(value = "/posts/{id}", method = RequestMethod.GET)
-//    public ResponseEntity<Author> getSingleAuthor(@PathVariable int id) {
-//        Optional<Author> authorOptional = authorRepository.findById(id);
-//
-//        if(authorOptional.isPresent()) {
-//            return new ResponseEntity<>(authorOptional.get(), HttpStatus.OK);
-//        }
-//        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//    }
+
+    @RequestMapping(value = "/authors/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Author> getSingleAuthor(@PathVariable int id) {
+        Optional<Author> authorOptional = authorRepository.findById(id);
+
+        if(authorOptional.isPresent()) {
+            return new ResponseEntity<>(authorOptional.get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 
     //Seed the data
     @Override
     public void run(String... args) throws Exception {
         Lorem lorem = new LoremIpsum();
 
+        //makes 10 authors
         for (int i = 0; i < 10; i++) {
-            List<String> items = new ArrayList<>();
-            for (int b = 0; b < ((int) (Math.random() * 7)); b++) {
-                items.add(lorem.getParagraphs(1, 5));
-            }
-
             Author author = authorRepository.save(new Author(lorem.getName()));
-            BlogPost blogPost = new BlogPost(lorem.getTitle(1), author, items);
-            blogPostRepository.save(blogPost);
+
+            //Make 1-5 blogposts
+            for (int j = 0; j < 4; j++) {
+                List<String> items = new ArrayList<>();
+
+                //add 1-7 paragraps to the post
+                for (int b = 0; b < 3; b++) {
+                    items.add(lorem.getHtmlParagraphs(1,1));
+                }
+
+                BlogPost blogPost = new BlogPost(lorem.getTitle(1), author, items);
+                blogPostRepository.save(blogPost);
+            }
         }
     }
 }
