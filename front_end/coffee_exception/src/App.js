@@ -6,6 +6,7 @@ import promise from 'redux-promise';
 
 import reducers from './reducers';
 import PostsContainer from './containers/PostsContainer';
+import { Container, Row, Col } from 'reactstrap';
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
@@ -14,11 +15,22 @@ class App extends Component {
     return (
         <Provider store={createStoreWithMiddleware(reducers)}>
             <BrowserRouter>
-                <div>
-                    <Switch>
-                        <Route path="/" component={PostsContainer} />
-                    </Switch>
-                </div>
+                <Container>
+                    <Row>
+                        <Col></Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <Switch>
+                                <Route path="/" component={PostsContainer} />
+                            </Switch>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col></Col>
+                    </Row>
+
+                </Container>
             </BrowserRouter>
         </Provider>
     );
