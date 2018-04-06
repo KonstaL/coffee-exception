@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { fetchPosts } from "../actions/fetchPosts";
 import { connect } from 'react-redux';
-import { Card, Row, Col } from 'reactstrap';
+
+import { Post } from '../components/Post';
 
 class PostsContainer extends Component {
     componentDidMount() {
@@ -23,35 +24,13 @@ class PostsContainer extends Component {
     renderListFromData() {
         return this.props.posts.map(post => {
             return (
-                <div>
-                    <Post
-                        key={post.id}
-                        title={post.title}
-                        author={post.author.userName}
-                        date={post.date}
-                        bodyItems={post.bodyItems}
-                    />
-                    <Card style={{padding:20 + 'px', margin:10 + 'px'}} key={post.id}>
-                        <Row style={{marginBottom: 10 + 'px'}}>
-                            <Col md="9">
-                                <h3>{post.title}</h3>
-                            </Col>
-                            <Col md="3">
-                                <Row>
-                                    {post.author.userName}{post.date}
-                                </Row>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col md="12">
-                                <div>
-                                    {this.convertStringToHtml(post.bodyItems)}
-                                </div>
-                            </Col>
-                        </Row>
-                    </Card>
-                </div>
-
+                <Post
+                    key={post.id}
+                    title={post.title}
+                    author={post.author.userName}
+                    date={post.date}
+                    body={this.convertStringToHtml(post.bodyItems)}
+                />
             );
         })
     }
