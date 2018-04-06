@@ -24,7 +24,7 @@ public class BlogPost {
     @Column(nullable = false)
     private LocalDate date;
 
-//    @JsonManagedReference
+    //@JsonManagedReference
     @ManyToOne
     @JoinColumn(name="author_id", nullable = false)
     private Author author;
