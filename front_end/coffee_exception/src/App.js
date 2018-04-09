@@ -8,6 +8,7 @@ import reducers from './reducers';
 import PostsContainer from './containers/PostsContainer';
 import { Container, Row, Col } from 'reactstrap';
 import Header from './components/Header';
+import Footer from './components/Footer';
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
@@ -19,7 +20,7 @@ class App extends Component {
           <Container fluid={true}>
             <Row>
               <Col>
-                <Header color={'papayawhip'} />
+                <Header color={'#c3c3c3'} />
               </Col>
             </Row>
             <Row>
@@ -35,7 +36,7 @@ class App extends Component {
             </Row>
             <Row>
               <Col>
-                <Header />
+                <Footer color={'#f3f3f3'} />
               </Col>
             </Row>
           </Container>
