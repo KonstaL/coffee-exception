@@ -29,6 +29,28 @@ const LinkContainer = Styled.div`
     height: 100%;
 `;
 
+const StyledLink = Styled(Link)`
+    color: red;
+    font-weight: bold;
+
+    &:after {
+      content:'';
+      width:0px;
+      height:1px;
+      display:block;
+      background:black;
+      transition: all .1s ease-in;
+    }
+
+    &:hover {
+      text-decoration: none;
+      color: white;
+    }
+    &:hover:after {
+      width: 100%;
+    }
+`;
+
 class Header extends Component {
   render() {
     return (
@@ -43,9 +65,9 @@ class Header extends Component {
             <Col md="8" xs="12">
               <LinkContainer>
                 <FlexContainer>
-                  <Link to="/about">About us</Link>
-                  <Link to="/posts">Posts</Link>
-                  <Link to="/login">Login</Link>
+                  <StyledLink to="/about">About us</StyledLink>
+                  <StyledLink to="/posts">Posts</StyledLink>
+                  <StyledLink to="/login">Login</StyledLink>
                 </FlexContainer>
               </LinkContainer>
             </Col>
