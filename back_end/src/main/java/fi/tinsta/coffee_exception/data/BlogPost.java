@@ -1,15 +1,19 @@
 package fi.tinsta.coffee_exception.data;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
-
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class BlogPost {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(nullable = false)
@@ -19,9 +23,9 @@ public class BlogPost {
     private LocalDate date;
 
     @ManyToOne
-    @JoinColumn(name="author_id")
+    @JoinColumn(name = "author", nullable = false)
+    @JsonIdentityReference(alwaysAsId = true)
     private Author author;
-
 
     @ElementCollection
     @Column(columnDefinition = "TEXT")
@@ -77,6 +81,5 @@ public class BlogPost {
     public void setBodyItems(List<String> bodyItems) {
         this.bodyItems = bodyItems;
     }
-
 
 }

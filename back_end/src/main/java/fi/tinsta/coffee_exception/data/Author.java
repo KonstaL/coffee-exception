@@ -1,13 +1,17 @@
 package fi.tinsta.coffee_exception.data;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Author {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(nullable = false)
@@ -20,7 +24,8 @@ public class Author {
         this.userName = userName;
     }
 
-    public Author() {}
+    public Author() {
+    }
 
     public int getId() {
         return id;
