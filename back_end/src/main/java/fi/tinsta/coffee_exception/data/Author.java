@@ -18,7 +18,6 @@ public class Author {
     private String userName;
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
-    //@JsonBackReference
     private List<BlogPost> blogPosts;
 
     public Author(String userName) {
