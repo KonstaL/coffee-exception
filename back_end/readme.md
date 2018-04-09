@@ -1,0 +1,1 @@
+To run this backend, go to type 'mvn compile' follewed by 'mvn spring-boot:run'. Note, you must have Maven installed.
