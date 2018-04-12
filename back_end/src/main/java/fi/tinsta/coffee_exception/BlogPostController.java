@@ -8,37 +8,41 @@ import fi.tinsta.coffee_exception.data.BlogPost;
 import fi.tinsta.coffee_exception.data.BlogPostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.hateoas.ExposesResourceFor;
+import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+
 @RestController
-public class MyRestController implements CommandLineRunner {
+//@ExposesResourceFor(BookResource.class) // This is required to have EntityLinks working
+@RequestMapping("/posts")
+@Transactional // Making the controller transactional is just a way to simplify the persistence implementation (out of scope for this demo)
+public class BlogPostController implements CommandLineRunner {
 
-    @Autowired
     BlogPostRepository blogPostRepository;
-
-    @Autowired
     AuthorRepository authorRepository;
 
-    @RequestMapping("/")
-    public String htmlRoot() {
-        return "Hi! Welcome to my kong strong backend!";
+    @Autowired
+    public BlogPostController(AuthorRepository authorRepo, BlogPostRepository blogPostRepo) {
+        this.blogPostRepository = blogPostRepo;
+        this. authorRepository = authorRepo;
     }
 
-
-    @RequestMapping(value = "/posts", method = RequestMethod.GET,
+    @RequestMapping(value = "/", method = RequestMethod.GET,
             consumes = "application/json", produces = "application/json; charset=UTF-8")
     public ResponseEntity<Iterable<BlogPost>> findAll() {
         return new ResponseEntity<>(blogPostRepository.findAll(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/posts", method = RequestMethod.POST,
+    @RequestMapping(value = "/", method = RequestMethod.POST,
             consumes = "application/json", produces = "application/json; charset=UTF-8")
     public ResponseEntity<BlogPost> addOne(@RequestBody BlogPost blogPost) {
         System.out.println("New post: " + blogPost.toString());
@@ -47,7 +51,7 @@ public class MyRestController implements CommandLineRunner {
         return new ResponseEntity<>(blogPostRepository.save(blogPost), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/posts/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<BlogPost> getSinglePost(@PathVariable int id) {
         Optional<BlogPost> blogPostOptional = blogPostRepository.findById(id);
 
@@ -57,7 +61,7 @@ public class MyRestController implements CommandLineRunner {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @RequestMapping(value = "/posts/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> deleteData(@PathVariable int id) {
         Optional<BlogPost> blogPostOptional = blogPostRepository.findById(id);
 
@@ -68,31 +72,14 @@ public class MyRestController implements CommandLineRunner {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @RequestMapping(value = "/posts/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<BlogPost> updateSinglePost(@PathVariable int id, @RequestBody BlogPost blogPost) {
         Optional<BlogPost> blogPostOptional = blogPostRepository.findById(id);
 
         if(blogPostOptional.isPresent()) {
-             BlogPost test = blogPostOptional.get();
-             blogPost.setTitle("moi niko");
+            BlogPost test = blogPostOptional.get();
+            blogPost.setTitle("moi niko");
             return new ResponseEntity<>(blogPost, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-
-
-    @RequestMapping(value = "/authors", method = RequestMethod.GET,
-            consumes = "application/json", produces = "application/json; charset=UTF-8")
-    public ResponseEntity<Iterable<Author>> findAllAuthors() {
-        return new ResponseEntity<>(authorRepository.findAll(), HttpStatus.OK);
-    }
-
-    @RequestMapping(value = "/authors/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Author> getSingleAuthor(@PathVariable int id) {
-        Optional<Author> authorOptional = authorRepository.findById(id);
-
-        if(authorOptional.isPresent()) {
-            return new ResponseEntity<>(authorOptional.get(), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
