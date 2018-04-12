@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { fetchTrendingPosts } from '../actions/fetchTrendingPosts';
 import { connect } from 'react-redux';
-import { Card, Row, Col, CardDeck, Container } from 'reactstrap';
-import { Post } from '../components/Post';
+import { Row, CardDeck, Container } from 'reactstrap';
 import { PostRow } from '../components/PostRow';
 
 class TrendingPostsContainer extends Component {
@@ -16,7 +15,7 @@ class TrendingPostsContainer extends Component {
     let threeInARow = false;
     let index = 0;
 
-    if (this.props.posts != 0) {
+    if (this.props.posts !== 0) {
       for (let i = 0; i < this.props.posts.length; i++) {
         if (i <= 1 || (i > 1 && !threeInARow)) {
           index = i;
@@ -40,34 +39,19 @@ class TrendingPostsContainer extends Component {
     return rows;
   }
 
-  /**
-   *
-   * <container>
-   *
-   * 2-3 posts
-   *
-   *
-   * <container>
-   */
-
   render() {
     return (
-      <Container fluid={true}>
-        <Row>
+      <div className="content-container">
+        <Container fluid={true}>
           <Container fluid={true}>
             <Row>
-              <CardDeck />
+              <CardDeck style={{ justifyContent: 'center' }}>
+                {this.renderPostsFromData()}
+              </CardDeck>
             </Row>
           </Container>
-        </Row>
-        <Row>
-          <Container fluid={true}>
-            <CardDeck style={{ justifyContent: 'center' }}>
-              {this.renderPostsFromData()}
-            </CardDeck>
-          </Container>
-        </Row>
-      </Container>
+        </Container>
+      </div>
     );
   }
 }

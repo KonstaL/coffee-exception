@@ -17,15 +17,11 @@ class App extends Component {
       <Provider store={createStoreWithMiddleware(reducers)}>
         <BrowserRouter>
           <Container fluid={true}>
+            <Row />
             <Row>
-              <Col />
-            </Row>
-            <Row>
-              <Col>
-                <Switch>
-                  <Route path="/" component={TrendingPostsContainer} />
-                </Switch>
-              </Col>
+              <Switch>
+                <Route path="/" component={TrendingPostsContainer} />
+              </Switch>
             </Row>
             <Row>
               <Col />

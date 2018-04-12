@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Row, Container } from 'reactstrap';
+import { Row, Container, Col } from 'reactstrap';
 import { Post } from './Post';
+import _ from 'lodash';
 
 export class PostRow extends Component {
   convertStringToHtml(items) {
@@ -15,38 +16,58 @@ export class PostRow extends Component {
     ));
   }
 
-  getSize(index) {
-    if (index < 2) {
-      return 'lg';
-    } else if (index % 5 == 0 || index % 5 == 1) {
-      return 'md';
-    } else {
-      return 'sm';
-    }
-  }
+  createPosts(val) {
+    let defaultColValues = {
+      xs: 12,
+      sm: 12,
+      md: 12,
+      lg: 12,
+      xl: 12
+    };
 
-  createPosts() {
+    let result = _.assign({}, defaultColValues, val);
+
     return this.props.posts.map((post, index) => (
-      <Post
+      <Col
+        className="post-column"
         key={post.id}
-        size={this.getSize(this.props.index)}
-        title={post.title}
-        author={post.author.userName}
-        date={post.date}
-        body={this.convertStringToHtml(post.bodyItems)}
-      />
+        xs={result.xs}
+        sm={result.sm}
+        md={result.md}
+        lg={result.lg}
+        xl={result.xl}
+      >
+        <Post
+          title={post.title}
+          author={post.author.userName}
+          date={post.date}
+          body={this.convertStringToHtml(post.bodyItems)}
+        />
+      </Col>
     ));
   }
 
   render() {
     if (this.props.index < 2) {
-      return <Row>{this.createPosts()}</Row>;
+      return (
+        <Row style={{ justifyContent: 'center' }}>
+          {this.createPosts({ lg: 12, xl: 6 })}
+        </Row>
+      );
+    }
+
+    if (this.props.index % 5 === 0 || this.props.index % 5 === 1) {
+      return (
+        <Row style={{ justifyContent: 'center', maxWidth: 1100 + 'px' }}>
+          {this.createPosts({ md: 12, xl: 6 })}
+        </Row>
+      );
     }
 
     return (
-      <Container>
-        <Row>{this.createPosts()}</Row>
-      </Container>
+      <Row style={{ justifyContent: 'center', maxWidth: 1100 + 'px' }}>
+        {this.createPosts({ md: 12, xl: 4 })}
+      </Row>
     );
   }
 }
