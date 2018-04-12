@@ -1,15 +1,19 @@
-package fi.tinsta.coffee_exception;
+package fi.tinsta.coffee_exception.controller;
 
 import com.thedeanda.lorem.Lorem;
 import com.thedeanda.lorem.LoremIpsum;
+import fi.tinsta.coffee_exception.BlogPostResourceAssembler;
 import fi.tinsta.coffee_exception.data.Author;
 import fi.tinsta.coffee_exception.data.AuthorRepository;
 import fi.tinsta.coffee_exception.data.BlogPost;
 import fi.tinsta.coffee_exception.data.BlogPostRepository;
+import fi.tinsta.coffee_exception.resources.AuthorResource;
+import fi.tinsta.coffee_exception.resources.BlogPostResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.hateoas.ExposesResourceFor;
 import org.springframework.hateoas.Link;
+import org.springframework.hateoas.Resources;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,25 +26,36 @@ import java.util.Optional;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
 @RestController
-//@ExposesResourceFor(BookResource.class) // This is required to have EntityLinks working
+@ExposesResourceFor(BlogPostResource.class) // This is required to have EntityLinks working
 @RequestMapping("/posts")
 @Transactional // Making the controller transactional is just a way to simplify the persistence implementation (out of scope for this demo)
-public class BlogPostController implements CommandLineRunner {
+public class BlogPostController {
 
     BlogPostRepository blogPostRepository;
-    AuthorRepository authorRepository;
+    BlogPostResourceAssembler blogPostResourceAssembler;
 
     @Autowired
-    public BlogPostController(AuthorRepository authorRepo, BlogPostRepository blogPostRepo) {
+    public BlogPostController(BlogPostResourceAssembler blogPostResourceAssembler, BlogPostRepository blogPostRepo) {
         this.blogPostRepository = blogPostRepo;
-        this. authorRepository = authorRepo;
+        this. blogPostResourceAssembler = blogPostResourceAssembler;
     }
+
 
     @RequestMapping(value = "/", method = RequestMethod.GET,
             consumes = "application/json", produces = "application/json; charset=UTF-8")
-    public ResponseEntity<Iterable<BlogPost>> findAll() {
-        return new ResponseEntity<>(blogPostRepository.findAll(), HttpStatus.OK);
+    public ResponseEntity<Resources<BlogPostResource>> findAll() {
+        Iterable<BlogPost> blogPosts = blogPostRepository.findAll();
+        Resources<BlogPostResource> wrapped = blogPostResourceAssembler.toEmbeddedList(blogPosts);
+
+        //        for (Author author : authors) {
+//            Link selfLink = linkTo(AuthorController.class).slash(author.getId()).withSelfRel();
+//            author.add(selfLink);
+//        }
+
+        return new ResponseEntity<>(wrapped, HttpStatus.OK);
     }
+
+
 
     @RequestMapping(value = "/", method = RequestMethod.POST,
             consumes = "application/json", produces = "application/json; charset=UTF-8")
@@ -52,7 +67,7 @@ public class BlogPostController implements CommandLineRunner {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<BlogPost> getSinglePost(@PathVariable int id) {
+    public ResponseEntity<BlogPost> getSinglePost(@PathVariable long id) {
         Optional<BlogPost> blogPostOptional = blogPostRepository.findById(id);
 
         if(blogPostOptional.isPresent()) {
@@ -62,7 +77,7 @@ public class BlogPostController implements CommandLineRunner {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Void> deleteData(@PathVariable int id) {
+    public ResponseEntity<Void> deleteData(@PathVariable long id) {
         Optional<BlogPost> blogPostOptional = blogPostRepository.findById(id);
 
         if(blogPostOptional.isPresent()) {
@@ -73,7 +88,7 @@ public class BlogPostController implements CommandLineRunner {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<BlogPost> updateSinglePost(@PathVariable int id, @RequestBody BlogPost blogPost) {
+    public ResponseEntity<BlogPost> updateSinglePost(@PathVariable long id, @RequestBody BlogPost blogPost) {
         Optional<BlogPost> blogPostOptional = blogPostRepository.findById(id);
 
         if(blogPostOptional.isPresent()) {
@@ -82,29 +97,5 @@ public class BlogPostController implements CommandLineRunner {
             return new ResponseEntity<>(blogPost, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-
-    //Seed the data
-    @Override
-    public void run(String... args) throws Exception {
-        Lorem lorem = new LoremIpsum();
-
-        //makes 10 authors
-        for (int i = 0; i < 10; i++) {
-            Author author = authorRepository.save(new Author(lorem.getName()));
-
-            //Make 1-5 blogposts
-            for (int j = 0; j < 4; j++) {
-                List<String> items = new ArrayList<>();
-
-                //add 1-7 paragraps to the post
-                for (int b = 0; b < 3; b++) {
-                    items.add(lorem.getHtmlParagraphs(1,1));
-                }
-
-                BlogPost blogPost = new BlogPost(lorem.getTitle(1), author, items);
-                blogPostRepository.save(blogPost);
-            }
-        }
     }
 }

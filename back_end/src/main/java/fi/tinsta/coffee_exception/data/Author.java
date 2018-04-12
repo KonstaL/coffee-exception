@@ -2,6 +2,7 @@ package fi.tinsta.coffee_exception.data;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.springframework.data.jpa.domain.AbstractPersistable;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.ResourceSupport;
 
@@ -9,17 +10,13 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "authorID")
-public class Author extends ResourceSupport {
+public class Author extends AbstractPersistable<Long> {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int authorID;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String userName;
 
-    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "author")
     private List<BlogPost> blogPosts;
 
     public Author(String userName) {
@@ -27,14 +24,6 @@ public class Author extends ResourceSupport {
     }
 
     public Author() {
-    }
-
-    public int getAuthorID() {
-        return authorID;
-    }
-
-    public void setAuthorID(int authorID) {
-        this.authorID = authorID;
     }
 
     public String getUserName() {
