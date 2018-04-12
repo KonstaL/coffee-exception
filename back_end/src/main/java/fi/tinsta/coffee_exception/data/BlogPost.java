@@ -3,18 +3,15 @@ package fi.tinsta.coffee_exception.data;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class BlogPost {
+public class BlogPost extends AbstractPersistable<Long> {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
 
     @Column(nullable = false)
     private String title;
@@ -22,9 +19,10 @@ public class BlogPost {
     @Column(nullable = false)
     private LocalDate date;
 
-    @ManyToOne
-    @JoinColumn(name = "author", nullable = false)
-    @JsonIdentityReference(alwaysAsId = true)
+    //@JoinTable(name = "books_author", joinColumns = {@JoinColumn(name="blogpost_id", referencedColumnName = "id")},
+    //                            inverseJoinColumns = {@JoinColumn(name="author_id", referencedColumnName = "id")})
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="author_id")
     private Author author;
 
     @ElementCollection
@@ -42,13 +40,6 @@ public class BlogPost {
         this.setDate(LocalDate.now());
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;
