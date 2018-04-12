@@ -65,3 +65,8 @@ p {
 .post-some-icons > p {
   margin-bottom: 0px;
 }
+
+html {
+  height: 100%;
+  background: #f3f3f3;
+}
