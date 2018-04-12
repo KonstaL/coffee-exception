@@ -7,8 +7,11 @@ import promise from 'redux-promise';
 import reducers from './reducers';
 import PostsContainer from './containers/PostsContainer';
 import { Container, Row, Col } from 'reactstrap';
+
+import TrendingPostsContainer from './containers/TrendingPostsContainer';
 import Header from './components/Header';
 import Footer from './components/Footer';
+
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
