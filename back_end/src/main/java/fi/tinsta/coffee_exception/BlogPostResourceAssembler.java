@@ -1,10 +1,6 @@
 package fi.tinsta.coffee_exception;
 
 
-
-import java.util.ArrayList;
-import java.util.List;
-
 import fi.tinsta.coffee_exception.controller.BlogPostController;
 import fi.tinsta.coffee_exception.data.BlogPost;
 import fi.tinsta.coffee_exception.resources.AuthorResource;
@@ -17,15 +13,11 @@ import org.springframework.hateoas.Resources;
 import org.springframework.hateoas.core.EmbeddedWrapper;
 import org.springframework.stereotype.Service;
 
-//import com.opencredo.demo.hateoas.api.resources.AuthorResource;
-//import com.opencredo.demo.hateoas.api.resources.BookResource;
-//import com.opencredo.demo.hateoas.api.resources.PublisherResource;
-//import com.opencredo.demo.hateoas.domain.Author;
-//import com.opencredo.demo.hateoas.domain.Book;
-//        import com.opencredo.demo.hateoas.domain.Publisher;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
-public class BlogPostResourceAssembler extends EmbeddableResourceAssemblerSupport<BlogPost, BlogPostResource, BlogPostController>{
+public class BlogPostResourceAssembler extends EmbeddableResourceAssemblerSupport<BlogPost, BlogPostResource, BlogPostController> {
 
     // Resource assemblers are not autowired in constructor as they depends each other on instantiation
     @Autowired
@@ -39,12 +31,12 @@ public class BlogPostResourceAssembler extends EmbeddableResourceAssemblerSuppor
 
     @Override
     protected BlogPostResource instantiateResource(BlogPost entity) {
-        return new BlogPostResource(entity.getTitle());
+        return new BlogPostResource(entity.getTitle(), entity.getBodyItems());
     }
 
 
     private BlogPostResource toBaseResource(BlogPost entity) {
-        final BlogPostResource resource =  createResourceWithId(entity.getId() , entity);
+        final BlogPostResource resource = createResourceWithId(entity.getId(), entity);
 
         return resource;
     }
@@ -60,7 +52,7 @@ public class BlogPostResourceAssembler extends EmbeddableResourceAssemblerSuppor
      */
     @Override
     public BlogPostResource toResource(BlogPost entity) {
-        final BlogPostResource resource =  toBaseResource( entity);
+        final BlogPostResource resource = toBaseResource(entity);
 
         // Add links to available actions
         //addActionLinks(resource, entity);
@@ -70,8 +62,8 @@ public class BlogPostResourceAssembler extends EmbeddableResourceAssemblerSuppor
 //        for(Author author : entity.getAuthor()) {
 //            resource.add( authorResourceAssembler.linkToSingleResource(author).withRel(authorsRel) );
 //        }
-        System.out.println("==¨¨¨¨¨" + entity.getAuthor());
-       // resource.add(authorResourceAssembler.linkToSingleResource(entity.getAuthor()).withRel("author"));
+
+        // resource.add(authorResourceAssembler.linkToSingleResource(entity.getAuthor()).withRel("author"));
         resource.add(authorResourceAssembler.linkToSingleResource(entity.getAuthor()).withRel(authorRel));
 
         return resource;
@@ -95,10 +87,11 @@ public class BlogPostResourceAssembler extends EmbeddableResourceAssemblerSuppor
 
     /**
      * Creates a custom, detailed representation of book resource, embedding authors and publishers
+     *
      * @param entity
      */
     public BlogPostResource toDetailedResource(BlogPost entity) {
-        final BlogPostResource resource =  toBaseResource( entity);
+        final BlogPostResource resource = toBaseResource(entity);
 
         // Add links to available actions
         addActionLinks(resource, entity);
@@ -106,10 +99,10 @@ public class BlogPostResourceAssembler extends EmbeddableResourceAssemblerSuppor
         // Create the collection of embeddables of different types
         final List<EmbeddedWrapper> embeddables = new ArrayList<EmbeddedWrapper>();
         // Add authors
-        embeddables.add( authorResourceAssembler.toEmbeddable(entity.getAuthor()) );
+        embeddables.add(authorResourceAssembler.toEmbeddable(entity.getAuthor()));
 
 
-        resource.setEmbeddeds( new Resources<>(embeddables) ); // Note it must be wrapped in a Resources
+        resource.setEmbeddeds(new Resources<>(embeddables)); // Note it must be wrapped in a Resources
 
         return resource;
     }

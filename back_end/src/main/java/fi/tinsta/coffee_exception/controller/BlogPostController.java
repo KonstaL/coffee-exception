@@ -67,14 +67,16 @@ public class BlogPostController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<BlogPost> getSinglePost(@PathVariable long id) {
+    public ResponseEntity<BlogPostResource> getSinglePost(@PathVariable long id) {
         Optional<BlogPost> blogPostOptional = blogPostRepository.findById(id);
 
         if(blogPostOptional.isPresent()) {
-            return new ResponseEntity<>(blogPostOptional.get(), HttpStatus.OK);
+            BlogPostResource resource = blogPostResourceAssembler.toResource(blogPostOptional.get());
+            return new ResponseEntity<>(resource, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> deleteData(@PathVariable long id) {
