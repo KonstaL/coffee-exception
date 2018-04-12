@@ -27,12 +27,12 @@ public class IndexResourceAssembler {
     }
 
     public IndexResource buildIndex() {
-        // Note this is unfortunately hand-written. If you add a new entity, have to manually add a new link
+
         final List<Link> links = asList(
                 entityLinks.linkToCollectionResource(BlogPostResource.class).withRel( relProvider.getCollectionResourceRelFor(BlogPostResource.class) ),
                 entityLinks.linkToCollectionResource(AuthorResource.class).withRel( relProvider.getCollectionResourceRelFor(AuthorResource.class) )
         );
-        final IndexResource resource = new IndexResource("sample-hateoas", "A sample HATEOAS API");
+        final IndexResource resource = new IndexResource("Coffee Exception HATEAOS API", "This the backend API for the Coffee Exception blog. You can get data by authors or by posts");
         resource.add(links);
         return resource;
     }

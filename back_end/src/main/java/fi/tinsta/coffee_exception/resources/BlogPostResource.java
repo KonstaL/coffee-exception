@@ -23,7 +23,6 @@ public class BlogPostResource extends ResourceWithEmbeddeds {
         this.bodyItems = bodyItems;
     }
 
-
     public String getTitle() {
         return title;
     }
