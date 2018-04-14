@@ -27,11 +27,11 @@ public class Seed implements CommandLineRunner {
             Author author = authorRepository.save(new Author(lorem.getName()));
 
             //Make 1-4 blogposts
-            for (int j = 0; j < (int) (Math.random() * 3 + 1); j++) {
+            for (int j = 0; j < (int) (Math.random() * 4 + 1); j++) {
                 ArrayList<String> items = new ArrayList<>();
 
                 //Make 1-5 paragraphs
-                for (int c = 0; c < (int) (Math.random() * 4 + 1); c++) {
+                for (int c = 0; c < (int) (Math.random() * 1 + 1); c++) {
                     items.add(lorem.getHtmlParagraphs(1, 1));
                 }
 

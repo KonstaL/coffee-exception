@@ -12,7 +12,6 @@ import TrendingPostsContainer from './containers/TrendingPostsContainer';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
-
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
 class App extends Component {
@@ -23,19 +22,17 @@ class App extends Component {
           <Container fluid={true}>
             <Row>
               <Col>
-                <Header color={'#c3c3c3'} />
+                <Header color={'rgb(45, 66, 82)'} />
               </Col>
             </Row>
             <Row>
-              <Col>
-                <Switch>
-                  <Route exact path="/" component={PostsContainer} />
-                  <Route path="/about" render={() => <h1>about</h1>} />
-                  <Route path="/login" render={() => <h1>login</h1>} />
-                  <Route path="/posts" render={() => <h1>posts</h1>} />
-                  <Route path="/" render={() => <h1>404</h1>} />
-                </Switch>
-              </Col>
+              <Switch>
+                <Route exact path="/" component={TrendingPostsContainer} />
+                <Route path="/about" render={() => <h1>about</h1>} />
+                <Route path="/login" render={() => <h1>login</h1>} />
+                <Route path="/posts" component={PostsContainer} />
+                <Route path="/" render={() => <h1>404</h1>} />
+              </Switch>
             </Row>
             <Row>
               <Col>

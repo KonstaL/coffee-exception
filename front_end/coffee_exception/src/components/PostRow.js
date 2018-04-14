@@ -17,6 +17,7 @@ export class PostRow extends Component {
   }
 
   createPosts(val) {
+    console.log(val);
     let defaultColValues = {
       xs: 12,
       sm: 12,
@@ -26,7 +27,7 @@ export class PostRow extends Component {
     };
 
     let result = _.assign({}, defaultColValues, val);
-
+    //console.log(this.props.posts[0].title);
     return this.props.posts.map((post, index) => (
       <Col
         className="post-column"
@@ -39,7 +40,6 @@ export class PostRow extends Component {
       >
         <Post
           title={post.title}
-          author={post.author.userName}
           date={post.date}
           body={this.convertStringToHtml(post.bodyItems)}
         />
@@ -49,24 +49,20 @@ export class PostRow extends Component {
 
   render() {
     if (this.props.index < 2) {
-      return (
-        <Row style={{ justifyContent: 'center' }}>
-          {this.createPosts({ lg: 12, xl: 6 })}
-        </Row>
-      );
+      return <Row>{this.createPosts({ lg: 12, xl: 6 })}</Row>;
     }
 
     if (this.props.index % 5 === 0 || this.props.index % 5 === 1) {
       return (
-        <Row style={{ justifyContent: 'center', maxWidth: 1100 + 'px' }}>
-          {this.createPosts({ md: 12, xl: 6 })}
+        <Row className="post-row-additional">
+          {this.createPosts({ md: 12, lg: 6, xl: 6 })}
         </Row>
       );
     }
 
     return (
-      <Row style={{ justifyContent: 'center', maxWidth: 1100 + 'px' }}>
-        {this.createPosts({ md: 12, xl: 4 })}
+      <Row className="post-row-additional">
+        {this.createPosts({ md: 12, lg: 4, xl: 4 })}
       </Row>
     );
   }
