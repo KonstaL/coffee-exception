@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { fetchPosts } from '../actions/fetchPosts';
 import { connect } from 'react-redux';
-
+import { Container, Row } from 'reactstrap';
 import { Post } from '../components/Post';
 
 class PostsContainer extends Component {
@@ -22,23 +22,21 @@ class PostsContainer extends Component {
   }
 
   renderListFromData() {
-    return this.props.posts.map(post => (
-      <Post
-        key={post.id}
-        title={post.title}
-        author={post.author.userName}
-        date={post.date}
-        body={this.convertStringToHtml(post.bodyItems)}
-      />
-    ));
+    if (Object.getOwnPropertyNames(this.props.posts).length > 0) {
+      return this.props.posts._embedded.blogposts.map(post => (
+        <Row>
+          <Post
+            key={post.id}
+            title={post.title}
+            body={this.convertStringToHtml(post.bodyItems)}
+          />
+        </Row>
+      ));
+    }
   }
 
   render() {
-    return (
-      <div>
-        <ul>{this.renderListFromData()}</ul>
-      </div>
-    );
+    return <Container>{this.renderListFromData()}</Container>;
   }
 }
 

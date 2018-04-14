@@ -30,7 +30,7 @@ const LinkContainer = Styled.div`
 `;
 
 const StyledLink = Styled(Link)`
-    color: red;
+    color: white;
     font-weight: bold;
 
     &:after {
@@ -38,7 +38,7 @@ const StyledLink = Styled(Link)`
       width:0px;
       height:1px;
       display:block;
-      background:black;
+      background:white;
       transition: all .1s ease-in;
     }
 

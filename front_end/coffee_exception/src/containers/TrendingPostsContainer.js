@@ -14,31 +14,24 @@ class TrendingPostsContainer extends Component {
     let rows = [];
     let threeInARow = false;
     let index = 0;
-    console.log(this.props.posts);
+
     if (Object.getOwnPropertyNames(this.props.posts).length > 0) {
       for (let i = 0; i < this.props.posts._embedded.blogposts.length; i++) {
-        if (i <= 1 || (i > 1 && !threeInARow)) {
-          index = i;
-          arr.push(
-            this.props.posts._embedded.blogposts[i],
-            this.props.posts._embedded.blogposts[i + 1]
-          );
-          i = i + 1;
-        } else if (threeInARow) {
-          index = i;
-          arr.push(
-            this.props.posts._embedded.blogposts[i],
-            this.props.posts._embedded.blogposts[i + 1],
-            this.props.posts._embedded.blogposts[i + 2]
-          );
-          i = i + 2;
+        arr.push(this.props.posts._embedded.blogposts[i]);
+        if (i === this.props.posts._embedded.blogposts.length - 1) {
+          rows.push(<PostRow index={i} key={rows.length} posts={arr} />);
+          arr = [];
+        } else if (!threeInARow && arr.length === 2) {
+          rows.push(<PostRow index={i} key={rows.length} posts={arr} />);
+          arr = [];
+          threeInARow = !threeInARow;
+        } else if (threeInARow && arr.length === 3) {
+          rows.push(<PostRow index={i} key={rows.length} posts={arr} />);
+          arr = [];
+          threeInARow = !threeInARow;
         }
-        threeInARow = !threeInARow;
-        rows.push(<PostRow index={i} key={rows.length} posts={arr} />);
-        arr = [];
       }
     }
-
     return rows;
   }
 
@@ -47,11 +40,7 @@ class TrendingPostsContainer extends Component {
       <div className="content-container">
         <Container fluid={true}>
           <Container fluid={true}>
-            <Row>
-              <CardDeck style={{ justifyContent: 'center' }}>
-                {this.renderPostsFromData()}
-              </CardDeck>
-            </Row>
+            <Row>{this.renderPostsFromData()}</Row>
           </Container>
         </Container>
       </div>

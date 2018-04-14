@@ -22,7 +22,7 @@ class App extends Component {
           <Container fluid={true}>
             <Row>
               <Col>
-                <Header color={'#c3c3c3'} />
+                <Header color={'rgb(45, 66, 82)'} />
               </Col>
             </Row>
             <Row>
