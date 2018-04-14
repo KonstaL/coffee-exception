@@ -1,6 +1,5 @@
 package fi.tinsta.coffee_exception;
 
-
 import fi.tinsta.coffee_exception.controller.BlogPostController;
 import fi.tinsta.coffee_exception.data.BlogPost;
 import fi.tinsta.coffee_exception.resources.AuthorResource;
@@ -17,12 +16,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class BlogPostResourceAssembler extends EmbeddableResourceAssemblerSupport<BlogPost, BlogPostResource, BlogPostController> {
+public class BlogPostResourceAssembler
+        extends EmbeddableResourceAssemblerSupport<BlogPost, BlogPostResource, BlogPostController> {
 
     // Resource assemblers are not autowired in constructor as they depends each other on instantiation
     @Autowired
     private AuthorResourceAssembler authorResourceAssembler;
-
 
     @Autowired
     public BlogPostResourceAssembler(final EntityLinks entityLinks, final RelProvider relProvider) {
@@ -31,16 +30,14 @@ public class BlogPostResourceAssembler extends EmbeddableResourceAssemblerSuppor
 
     @Override
     protected BlogPostResource instantiateResource(BlogPost entity) {
-        return new BlogPostResource(entity.getTitle(), entity.getBodyItems());
+        return new BlogPostResource(entity.getId(), entity.getTitle(), entity.getBodyItems());
     }
-
 
     private BlogPostResource toBaseResource(BlogPost entity) {
         final BlogPostResource resource = createResourceWithId(entity.getId(), entity);
 
         return resource;
     }
-
 
     @Override
     public Link linkToSingleResource(BlogPost blogPost) {
@@ -59,9 +56,9 @@ public class BlogPostResourceAssembler extends EmbeddableResourceAssemblerSuppor
 
         // Add authors as links
         final String authorRel = relProvider.getCollectionResourceRelFor(AuthorResource.class);
-//        for(Author author : entity.getAuthor()) {
-//            resource.add( authorResourceAssembler.linkToSingleResource(author).withRel(authorsRel) );
-//        }
+        //        for(Author author : entity.getAuthor()) {
+        //            resource.add( authorResourceAssembler.linkToSingleResource(author).withRel(authorsRel) );
+        //        }
 
         // resource.add(authorResourceAssembler.linkToSingleResource(entity.getAuthor()).withRel("author"));
         resource.add(authorResourceAssembler.linkToSingleResource(entity.getAuthor()).withRel(authorRel));
@@ -71,18 +68,18 @@ public class BlogPostResourceAssembler extends EmbeddableResourceAssemblerSuppor
 
     private void addActionLinks(final BlogPostResource resource, final BlogPost entity) {
         // Add "purchase" link
-//        final Link purchaseLink = linkTo(methodOn(controllerClass).purchaseBookCopies(entity.getIsbn(), null)).withRel("purchase");
-//        resource.add(purchaseLink);
-//
-//        // Conditionally add "borrow" link, if there is any copy available
-//        if ( entity.getCopiesAvailable() > 0 ) {
-//            final Link borrowLink = linkTo(methodOn(controllerClass).borrowACopy(entity.getIsbn())).withRel("borrow");
-//            resource.add(borrowLink);
-//        }
-//
-//        // Add "return" link
-//        final Link returnLink = linkTo(methodOn(controllerClass).returnACopy(entity.getIsbn()) ).withRel("return");
-//        resource.add(returnLink);
+        //        final Link purchaseLink = linkTo(methodOn(controllerClass).purchaseBookCopies(entity.getIsbn(), null)).withRel("purchase");
+        //        resource.add(purchaseLink);
+        //
+        //        // Conditionally add "borrow" link, if there is any copy available
+        //        if ( entity.getCopiesAvailable() > 0 ) {
+        //            final Link borrowLink = linkTo(methodOn(controllerClass).borrowACopy(entity.getIsbn())).withRel("borrow");
+        //            resource.add(borrowLink);
+        //        }
+        //
+        //        // Add "return" link
+        //        final Link returnLink = linkTo(methodOn(controllerClass).returnACopy(entity.getIsbn()) ).withRel("return");
+        //        resource.add(returnLink);
     }
 
     /**
@@ -100,7 +97,6 @@ public class BlogPostResourceAssembler extends EmbeddableResourceAssemblerSuppor
         final List<EmbeddedWrapper> embeddables = new ArrayList<EmbeddedWrapper>();
         // Add authors
         embeddables.add(authorResourceAssembler.toEmbeddable(entity.getAuthor()));
-
 
         resource.setEmbeddeds(new Resources<>(embeddables)); // Note it must be wrapped in a Resources
 

@@ -11,14 +11,17 @@ import java.util.List;
 @Relation(value = "blogpost", collectionRelation = "blogposts")
 public class BlogPostResource extends ResourceWithEmbeddeds {
 
-
     private final String title;
 
     private final List<String> bodyItems;
 
+    private final Long id;
+
     @JsonCreator
-    public BlogPostResource(@JsonProperty("title") String title, @JsonProperty("bodyitems") List<String>bodyItems ) {
+    public BlogPostResource(@JsonProperty("id") long id, @JsonProperty("title") String title,
+            @JsonProperty("bodyitems") List<String> bodyItems) {
         super();
+        this.id = id;
         this.title = title;
         this.bodyItems = bodyItems;
     }

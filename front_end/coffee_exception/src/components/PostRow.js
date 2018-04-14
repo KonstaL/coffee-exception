@@ -26,8 +26,14 @@ export class PostRow extends Component {
     };
 
     let result = _.assign({}, defaultColValues, val);
-
-    return this.props.posts.map((post, index) => (
+    //console.log(this.props.posts[0].title);
+    let lol = this.props.posts.map((post, index) => {
+      if (post != null) {
+        return post.title;
+      }
+    });
+    console.log(lol);
+    /*return this.props.posts.map((post, index) => (
       <Col
         className="post-column"
         key={post.id}
@@ -44,7 +50,7 @@ export class PostRow extends Component {
           body={this.convertStringToHtml(post.bodyItems)}
         />
       </Col>
-    ));
+    ));*/
   }
 
   render() {

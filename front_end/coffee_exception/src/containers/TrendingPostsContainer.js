@@ -14,19 +14,22 @@ class TrendingPostsContainer extends Component {
     let rows = [];
     let threeInARow = false;
     let index = 0;
-
-    if (this.props.posts !== 0) {
-      for (let i = 0; i < this.props.posts.length; i++) {
+    console.log(this.props.posts);
+    if (Object.getOwnPropertyNames(this.props.posts).length > 0) {
+      for (let i = 0; i < this.props.posts._embedded.blogposts.length; i++) {
         if (i <= 1 || (i > 1 && !threeInARow)) {
           index = i;
-          arr.push(this.props.posts[i], this.props.posts[i + 1]);
+          arr.push(
+            this.props.posts._embedded.blogposts[i],
+            this.props.posts._embedded.blogposts[i + 1]
+          );
           i = i + 1;
         } else if (threeInARow) {
           index = i;
           arr.push(
-            this.props.posts[i],
-            this.props.posts[i + 1],
-            this.props.posts[i + 2]
+            this.props.posts._embedded.blogposts[i],
+            this.props.posts._embedded.blogposts[i + 1],
+            this.props.posts._embedded.blogposts[i + 2]
           );
           i = i + 2;
         }
