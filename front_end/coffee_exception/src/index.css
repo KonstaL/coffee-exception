@@ -22,6 +22,16 @@ dark brown:  rgb(84, 68, 47)
 light brown: rgb(173, 154, 128)
 */
 
+#login-form {
+  border: 1px solid rgba(200, 200, 200, 0.8);
+  padding: 50px;
+  max-width: 400px;
+  margin: auto;
+  margin-top: 100px;
+  margin-bottom: 200px;
+  box-shadow: 1px 1px 1px 0px rgba(150, 150, 150, 0.8);
+}
+
 .content-container {
   padding: 10px;
   overflow: hidden;
