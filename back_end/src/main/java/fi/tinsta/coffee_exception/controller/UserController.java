@@ -19,7 +19,7 @@ import java.util.Optional;
 
 @RestController
 @ExposesResourceFor(UserResource.class) // This is required to have EntityLinks working
-@RequestMapping("/authors")
+@RequestMapping("api/users")
 @Transactional
 public class UserController {
 

@@ -18,7 +18,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
 @RestController
 @ExposesResourceFor(BlogPostResource.class) // This is required to have EntityLinks working
-@RequestMapping("/posts")
+@RequestMapping("api/posts")
 @Transactional // Making the controller transactional is just a way to simplify the persistence implementation (out of scope for this demo)
 public class BlogPostController {
 
