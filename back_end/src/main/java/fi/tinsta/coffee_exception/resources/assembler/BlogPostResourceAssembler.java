@@ -2,7 +2,7 @@ package fi.tinsta.coffee_exception.resources.assembler;
 
 import fi.tinsta.coffee_exception.controller.BlogPostController;
 import fi.tinsta.coffee_exception.data.BlogPost;
-import fi.tinsta.coffee_exception.resources.AuthorResource;
+import fi.tinsta.coffee_exception.resources.UserResource;
 import fi.tinsta.coffee_exception.resources.BlogPostResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityLinks;
@@ -21,7 +21,7 @@ public class BlogPostResourceAssembler
 
     // Resource assemblers are not autowired in constructor as they depends each other on instantiation
     @Autowired
-    private AuthorResourceAssembler authorResourceAssembler;
+    private UserResourceAssembler userResourceAssembler;
 
     @Autowired
     public BlogPostResourceAssembler(final EntityLinks entityLinks, final RelProvider relProvider) {
@@ -60,13 +60,13 @@ public class BlogPostResourceAssembler
         //addActionLinks(resource, entity);
 
         // Add authors as links
-        final String authorRel = relProvider.getCollectionResourceRelFor(AuthorResource.class);
-        //        for(Author author : entity.getAuthor()) {
+        final String authorRel = relProvider.getCollectionResourceRelFor(UserResource.class);
+        //        for(User author : entity.getUser()) {
         //            resource.add( authorResourceAssembler.linkToSingleResource(author).withRel(authorsRel) );
         //        }
 
-        // resource.add(authorResourceAssembler.linkToSingleResource(entity.getAuthor()).withRel("author"));
-        resource.add(authorResourceAssembler.linkToSingleResource(entity.getAuthor()).withRel(authorRel));
+        // resource.add(authorResourceAssembler.linkToSingleResource(entity.getUser()).withRel("author"));
+        resource.add(userResourceAssembler.linkToSingleResource(entity.getUser()).withRel(authorRel));
 
         return resource;
     }
@@ -101,7 +101,7 @@ public class BlogPostResourceAssembler
         // Create the collection of embeddables of different types
         final List<EmbeddedWrapper> embeddables = new ArrayList<EmbeddedWrapper>();
         // Add authors
-        embeddables.add(authorResourceAssembler.toEmbeddable(entity.getAuthor()));
+        embeddables.add(userResourceAssembler.toEmbeddable(entity.getUser()));
 
         resource.setEmbeddeds(new Resources<>(embeddables)); // Note it must be wrapped in a Resources
 

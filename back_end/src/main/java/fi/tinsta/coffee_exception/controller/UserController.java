@@ -1,9 +1,9 @@
 package fi.tinsta.coffee_exception.controller;
 
-import fi.tinsta.coffee_exception.resources.assembler.AuthorResourceAssembler;
-import fi.tinsta.coffee_exception.data.Author;
-import fi.tinsta.coffee_exception.data.AuthorRepository;
-import fi.tinsta.coffee_exception.resources.AuthorResource;
+import fi.tinsta.coffee_exception.resources.assembler.UserResourceAssembler;
+import fi.tinsta.coffee_exception.data.User;
+import fi.tinsta.coffee_exception.data.UserRepository;
+import fi.tinsta.coffee_exception.resources.UserResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.ExposesResourceFor;
 import org.springframework.hateoas.Resources;
@@ -18,28 +18,28 @@ import javax.transaction.Transactional;
 import java.util.Optional;
 
 @RestController
-@ExposesResourceFor(AuthorResource.class) // This is required to have EntityLinks working
+@ExposesResourceFor(UserResource.class) // This is required to have EntityLinks working
 @RequestMapping("/authors")
 @Transactional
-public class AuthorController {
+public class UserController {
 
-    AuthorRepository authorRepository;
-    AuthorResourceAssembler authorResourceAssembler;
+    UserRepository userRepository;
+    UserResourceAssembler userResourceAssembler;
 
     @Autowired
-    public AuthorController(AuthorRepository authorRepo, AuthorResourceAssembler authorResourceAssembler) {
-        this.authorResourceAssembler = authorResourceAssembler;
-        this.authorRepository = authorRepo;
+    public UserController(UserRepository authorRepo, UserResourceAssembler userResourceAssembler) {
+        this.userResourceAssembler = userResourceAssembler;
+        this.userRepository = authorRepo;
     }
 
 
     @RequestMapping(value = "/", method = RequestMethod.GET,
             consumes = "application/json", produces = "application/json; charset=UTF-8")
-    public ResponseEntity<Resources<AuthorResource>> findAllAuthors() {
-        Iterable<Author> authors = authorRepository.findAll();
+    public ResponseEntity<Resources<UserResource>> findAllAuthors() {
+        Iterable<User> authors = userRepository.findAll();
 
-        final Resources<AuthorResource> wrapped = authorResourceAssembler.toEmbeddedList(authors);
-//        for (Author author : authors) {
+        final Resources<UserResource> wrapped = userResourceAssembler.toEmbeddedList(authors);
+//        for (User author : authors) {
 //            Link selfLink = linkTo(AuthorController.class).slash(author.getId()).withSelfRel();
 //            author.add(selfLink);
 //        }
@@ -47,11 +47,11 @@ public class AuthorController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<AuthorResource> getSingleAuthor(@PathVariable long id) {
-        Optional<Author> authorOptional = authorRepository.findById(id);
+    public ResponseEntity<UserResource> getSingleAuthor(@PathVariable long id) {
+        Optional<User> authorOptional = userRepository.findById(id);
 
         if (authorOptional.isPresent()) {
-            AuthorResource resource = authorResourceAssembler.toResource(authorOptional.get());
+            UserResource resource = userResourceAssembler.toResource(authorOptional.get());
             return ResponseEntity.ok(resource);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);

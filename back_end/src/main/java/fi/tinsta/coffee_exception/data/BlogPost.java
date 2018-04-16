@@ -1,10 +1,7 @@
 package fi.tinsta.coffee_exception.data;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.springframework.data.jpa.domain.AbstractPersistable;
-import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -27,8 +24,8 @@ public class BlogPost extends AbstractPersistable<Long> {
     private LocalDate date;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "author_id")
-    private Author author;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @JsonManagedReference
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -43,9 +40,9 @@ public class BlogPost extends AbstractPersistable<Long> {
         this.setDate(LocalDate.now());
     }
 
-    public BlogPost(String title, Author author, String bannerUrl, List<String> bodyItems) {
+    public BlogPost(String title, User user, String bannerUrl, List<String> bodyItems) {
         this.title = title;
-        this.author = author;
+        this.user = user;
         this.bannerUrl = bannerUrl;
         this.bodyItems = bodyItems;
         this.comments = new ArrayList<>();
@@ -99,12 +96,12 @@ public class BlogPost extends AbstractPersistable<Long> {
         this.date = date;
     }
 
-    public Author getAuthor() {
-        return author;
+    public User getUser() {
+        return user;
     }
 
-    public void setAuthor(Author author) {
-        this.author = author;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public List<String> getBodyItems() {

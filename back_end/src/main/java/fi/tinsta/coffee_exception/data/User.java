@@ -10,7 +10,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class Author extends AbstractPersistable<Long> {
+public class User extends AbstractPersistable<Long> {
 
 
     @Column(nullable = false, unique = true)
@@ -18,14 +18,14 @@ public class Author extends AbstractPersistable<Long> {
 
     private String imageUrl;
 
-    @OneToMany(mappedBy = "author")
+    @OneToMany(mappedBy = "user")
     private List<BlogPost> blogPosts;
 
-    public Author(String userName) {
+    public User(String userName) {
         this.userName = userName;
     }
 
-    public Author() {
+    public User() {
     }
 
     public String getImageUrl() {

@@ -1,11 +1,7 @@
 package fi.tinsta.coffee_exception.data;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.data.jpa.domain.AbstractPersistable;
-import org.springframework.hateoas.config.EnableEntityLinks;
-import org.springframework.lang.Nullable;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,16 +14,16 @@ import java.time.LocalDate;
 public class Comment extends AbstractPersistable<Long> {
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="author_id")
+    @JoinColumn(name="user_id")
     @JsonBackReference
-    private Author author;
+    private User user;
 
     private String text;
     private int likes;
     private LocalDate localDate;
 
-    public Comment(Author author, String text) {
-        this.author = author;
+    public Comment(User user, String text) {
+        this.user = user;
         this.text = text;
         this.setLocalDate(LocalDate.now());
     }
@@ -44,12 +40,12 @@ public class Comment extends AbstractPersistable<Long> {
         this.likes++;
     }
 
-    public Author getAuthor() {
-        return author;
+    public User getUser() {
+        return user;
     }
 
-    public void setAuthor(Author author) {
-        this.author = author;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getText() {

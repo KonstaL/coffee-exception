@@ -38,7 +38,7 @@ public class BlogPostController {
         Iterable<BlogPost> blogPosts = blogPostRepository.findAll();
         Resources<BlogPostResource> wrapped = blogPostResourceAssembler.toEmbeddedList(blogPosts);
 
-        //        for (Author author : authors) {
+        //        for (User author : authors) {
 //            Link selfLink = linkTo(AuthorController.class).slash(author.getId()).withSelfRel();
 //            author.add(selfLink);
 //        }

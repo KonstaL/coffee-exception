@@ -5,7 +5,7 @@ import static java.util.Arrays.asList;
 
 import java.util.List;
 
-import fi.tinsta.coffee_exception.resources.AuthorResource;
+import fi.tinsta.coffee_exception.resources.UserResource;
 import fi.tinsta.coffee_exception.resources.BlogPostResource;
 import fi.tinsta.coffee_exception.resources.IndexResource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ public class IndexResourceAssembler {
 
         final List<Link> links = asList(
                 entityLinks.linkToCollectionResource(BlogPostResource.class).withRel( relProvider.getCollectionResourceRelFor(BlogPostResource.class) ),
-                entityLinks.linkToCollectionResource(AuthorResource.class).withRel( relProvider.getCollectionResourceRelFor(AuthorResource.class) )
+                entityLinks.linkToCollectionResource(UserResource.class).withRel( relProvider.getCollectionResourceRelFor(UserResource.class) )
         );
         final IndexResource resource = new IndexResource("Coffee Exception HATEAOS API", "This the backend API for the Coffee Exception blog. You can get data by authors or by posts");
         resource.add(links);
