@@ -1,4 +1,4 @@
-package fi.tinsta.coffee_exception;
+package fi.tinsta.coffee_exception.resources.assembler;
 
 import fi.tinsta.coffee_exception.controller.BlogPostController;
 import fi.tinsta.coffee_exception.data.BlogPost;
@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 @Service
 public class BlogPostResourceAssembler
@@ -31,7 +30,12 @@ public class BlogPostResourceAssembler
 
     @Override
     protected BlogPostResource instantiateResource(BlogPost entity) {
-        return new BlogPostResource(entity.getId(), entity.getTitle(), entity.getBodyItems(), entity.getComments());
+        return new BlogPostResource(entity.getId(),
+                entity.getTitle(),
+                entity.getBannerUrl(),
+                entity.getLikes(),
+                entity.getBodyItems(),
+                entity.getComments());
     }
 
     private BlogPostResource toBaseResource(BlogPost entity) {

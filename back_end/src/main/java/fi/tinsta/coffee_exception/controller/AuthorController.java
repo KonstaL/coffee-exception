@@ -1,6 +1,6 @@
 package fi.tinsta.coffee_exception.controller;
 
-import fi.tinsta.coffee_exception.AuthorResourceAssembler;
+import fi.tinsta.coffee_exception.resources.assembler.AuthorResourceAssembler;
 import fi.tinsta.coffee_exception.data.Author;
 import fi.tinsta.coffee_exception.data.AuthorRepository;
 import fi.tinsta.coffee_exception.resources.AuthorResource;

@@ -38,7 +38,7 @@ public class Seed implements CommandLineRunner {
                     items.add(lorem.getHtmlParagraphs(1, 1));
                 }
 
-                BlogPost blogPost = new BlogPost(lorem.getTitle(1), author, items);
+                BlogPost blogPost = new BlogPost(lorem.getTitle(1), author, "https://picsum.photos/800/500/?random", items);
 
                 blogPostRepository.save(blogPost);
             }
@@ -52,10 +52,8 @@ public class Seed implements CommandLineRunner {
                     new Comment(authors.get(1), "I agree. So much useful information"),
                     new Comment(authors.get(2), "Nah. It would've been better to use Go for this")};
 
-            //Hibernate.initialize(blogPost);
             blogPost.addComments(comments);
             blogPostRepository.save(blogPost);
-            //System.out.println(comments);
         }
     }
 }

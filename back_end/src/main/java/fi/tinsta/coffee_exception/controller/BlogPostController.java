@@ -1,26 +1,17 @@
 package fi.tinsta.coffee_exception.controller;
 
-import com.thedeanda.lorem.Lorem;
-import com.thedeanda.lorem.LoremIpsum;
-import fi.tinsta.coffee_exception.BlogPostResourceAssembler;
-import fi.tinsta.coffee_exception.data.Author;
-import fi.tinsta.coffee_exception.data.AuthorRepository;
+import fi.tinsta.coffee_exception.resources.assembler.BlogPostResourceAssembler;
 import fi.tinsta.coffee_exception.data.BlogPost;
 import fi.tinsta.coffee_exception.data.BlogPostRepository;
-import fi.tinsta.coffee_exception.resources.AuthorResource;
 import fi.tinsta.coffee_exception.resources.BlogPostResource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.hateoas.ExposesResourceFor;
-import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;

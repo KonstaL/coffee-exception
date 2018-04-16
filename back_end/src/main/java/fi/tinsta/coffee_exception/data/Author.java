@@ -16,6 +16,8 @@ public class Author extends AbstractPersistable<Long> {
     @Column(nullable = false, unique = true)
     private String userName;
 
+    private String imageUrl;
+
     @OneToMany(mappedBy = "author")
     private List<BlogPost> blogPosts;
 
@@ -24,6 +26,14 @@ public class Author extends AbstractPersistable<Long> {
     }
 
     public Author() {
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getUserName() {

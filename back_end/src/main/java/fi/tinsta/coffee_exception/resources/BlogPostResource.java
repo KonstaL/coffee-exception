@@ -13,19 +13,26 @@ import java.util.List;
 public class BlogPostResource extends ResourceWithEmbeddeds {
 
     private final String title;
+    private final int likes;
     private final List<String> bodyItems;
     private final List<Comment> comments;
+    private final String bannerUrl;
 
-    private final String test = "moi";
 
     private final Long postId;
 
     @JsonCreator
-    public BlogPostResource(@JsonProperty("id") long id, @JsonProperty("title") String title,
-            @JsonProperty("bodyitems") List<String> bodyItems, @JsonProperty("comments") List<Comment> comments) {
+    public BlogPostResource(@JsonProperty("id") long id,
+                            @JsonProperty("title") String title,
+                            @JsonProperty("bannerurl") String bannerUrl,
+                            @JsonProperty("likes") int likes,
+                            @JsonProperty("bodyitems") List<String> bodyItems,
+                            @JsonProperty("comments") List<Comment> comments) {
         super();
         this.postId = id;
+        this.likes = likes;
         this.title = title;
+        this.bannerUrl = bannerUrl;
         this.bodyItems = bodyItems;
         this.comments = comments;
     }
@@ -42,11 +49,15 @@ public class BlogPostResource extends ResourceWithEmbeddeds {
         return comments;
     }
 
-    public String getTest() {
-        return test;
-    }
-
     public Long getPostId() {
         return postId;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public String getBannerUrl() {
+        return bannerUrl;
     }
 }
