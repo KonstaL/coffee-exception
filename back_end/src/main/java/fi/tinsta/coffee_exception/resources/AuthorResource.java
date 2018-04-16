@@ -10,14 +10,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class AuthorResource extends ResourceWithEmbeddeds {
 
     private final String username;
+    private final String imageUrl;
 
     @JsonCreator
-    public AuthorResource(@JsonProperty("username") String username) {
+    public AuthorResource(@JsonProperty("username") String username, @JsonProperty("imageUrl") String imageUrl) {
         super();
+        this.imageUrl = imageUrl;
         this.username = username;
     }
 
     public String getUsername() {
         return username;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
     }
 }

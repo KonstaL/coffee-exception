@@ -45,7 +45,7 @@ public class AuthorResourceAssembler extends EmbeddableResourceAssemblerSupport<
 
     @Override
     protected AuthorResource instantiateResource(Author entity) {
-        return new AuthorResource(entity.getUserName());
+        return new AuthorResource(entity.getUserName(), entity.getImageUrl());
     }
 
 }
