@@ -2,11 +2,14 @@ package fi.tinsta.coffee_exception.data;
 
 import com.thedeanda.lorem.Lorem;
 import com.thedeanda.lorem.LoremIpsum;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Component
 public class Seed implements CommandLineRunner {
@@ -36,8 +39,23 @@ public class Seed implements CommandLineRunner {
                 }
 
                 BlogPost blogPost = new BlogPost(lorem.getTitle(1), author, items);
+
                 blogPostRepository.save(blogPost);
             }
+        }
+
+        List<BlogPost> posts = blogPostRepository.findAll();
+        List<Author> authors = authorRepository.findAll();
+
+        for (BlogPost blogPost : posts ) {
+            Comment[] comments = {new Comment(authors.get(0), "This was a great post"),
+                    new Comment(authors.get(1), "I agree. So much useful information"),
+                    new Comment(authors.get(2), "Nah. It would've been better to use Go for this")};
+
+            //Hibernate.initialize(blogPost);
+            blogPost.addComments(comments);
+            blogPostRepository.save(blogPost);
+            //System.out.println(comments);
         }
     }
 }

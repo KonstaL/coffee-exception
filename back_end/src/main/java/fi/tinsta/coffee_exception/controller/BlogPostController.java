@@ -71,6 +71,7 @@ public class BlogPostController {
         Optional<BlogPost> blogPostOptional = blogPostRepository.findById(id);
 
         if(blogPostOptional.isPresent()) {
+            System.out.println(blogPostOptional.get().getComments());
             BlogPostResource resource = blogPostResourceAssembler.toResource(blogPostOptional.get());
             return new ResponseEntity<>(resource, HttpStatus.OK);
         }

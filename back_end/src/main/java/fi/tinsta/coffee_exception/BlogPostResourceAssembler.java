@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Service
 public class BlogPostResourceAssembler
@@ -30,7 +31,7 @@ public class BlogPostResourceAssembler
 
     @Override
     protected BlogPostResource instantiateResource(BlogPost entity) {
-        return new BlogPostResource(entity.getId(), entity.getTitle(), entity.getBodyItems());
+        return new BlogPostResource(entity.getId(), entity.getTitle(), entity.getBodyItems(), entity.getComments());
     }
 
     private BlogPostResource toBaseResource(BlogPost entity) {
