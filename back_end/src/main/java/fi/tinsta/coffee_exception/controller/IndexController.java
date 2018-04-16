@@ -1,18 +1,15 @@
 package fi.tinsta.coffee_exception.controller;
 
-import fi.tinsta.coffee_exception.IndexResourceAssembler;
-import fi.tinsta.coffee_exception.resources.BlogPostResource;
+import fi.tinsta.coffee_exception.resources.assembler.IndexResourceAssembler;
 import fi.tinsta.coffee_exception.resources.IndexResource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.ExposesResourceFor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.transaction.Transactional;
-
 @RestController
+@RequestMapping("api")
 public class IndexController {
 
 
@@ -31,7 +28,7 @@ public class IndexController {
 //    }
 
     // Give basic information about the API
-    @RequestMapping(method= RequestMethod.GET, consumes = "application/json",
+    @RequestMapping(value = "/", method= RequestMethod.GET, consumes = "application/json",
             produces = "application/json; charset=UTF-8")
     public ResponseEntity<IndexResource> index() {
         return ResponseEntity.ok(indexResourceAssembler.buildIndex());
