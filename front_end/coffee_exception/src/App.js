@@ -7,7 +7,7 @@ import promise from 'redux-promise';
 import reducers from './reducers';
 import PostsContainer from './containers/PostsContainer';
 import { Container, Row, Col } from 'reactstrap';
-
+import LoginContainer from './containers/LoginContainer';
 import TrendingPostsContainer from './containers/TrendingPostsContainer';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -29,7 +29,7 @@ class App extends Component {
               <Switch>
                 <Route exact path="/" component={TrendingPostsContainer} />
                 <Route path="/about" render={() => <h1>about</h1>} />
-                <Route path="/login" render={() => <h1>login</h1>} />
+                <Route path="/login" component={LoginContainer} />
                 <Route path="/posts" component={PostsContainer} />
                 <Route path="/" render={() => <h1>404</h1>} />
               </Switch>

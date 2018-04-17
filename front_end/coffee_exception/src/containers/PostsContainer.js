@@ -24,8 +24,10 @@ class PostsContainer extends Component {
   renderListFromData() {
     if (Object.getOwnPropertyNames(this.props.posts).length > 0) {
       return this.props.posts._embedded.blogposts.map(post => (
-        <Row>
+        <Row className="post-row-narrower">
           <Post
+            pic={Math.floor(Math.random() * (2 - 0 + 1)) + 0}
+            height={400}
             key={post.id}
             title={post.title}
             body={this.convertStringToHtml(post.bodyItems)}
