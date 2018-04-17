@@ -1,4 +1,4 @@
-package fi.tinsta.coffee_exception;
+package fi.tinsta.coffee_exception.resources.assembler;
 
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;

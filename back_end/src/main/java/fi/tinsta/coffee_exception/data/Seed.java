@@ -7,12 +7,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class Seed implements CommandLineRunner {
 
     @Autowired
-    AuthorRepository authorRepository;
+    UserRepository userRepository;
 
     @Autowired
     BlogPostRepository blogPostRepository;
@@ -22,9 +23,11 @@ public class Seed implements CommandLineRunner {
     public void run(String... args) throws Exception {
         Lorem lorem = new LoremIpsum();
 
-        //makes 10 authors
+        //makes 10 users
         for (int i = 0; i < 10; i++) {
-            Author author = authorRepository.save(new Author(lorem.getName()));
+            User user = new User(lorem.getName());
+            user.setImageUrl("https://randomuser.me/api/portraits/men/" + i + ".jpg");
+            userRepository.save(user);
 
             //Make 1-4 blogposts
             for (int j = 0; j < (int) (Math.random() * 4 + 1); j++) {
@@ -35,9 +38,22 @@ public class Seed implements CommandLineRunner {
                     items.add(lorem.getHtmlParagraphs(1, 1));
                 }
 
-                BlogPost blogPost = new BlogPost(lorem.getTitle(1), author, items);
+                BlogPost blogPost = new BlogPost(lorem.getTitle(1), user, "https://picsum.photos/800/500/?random", items);
+
                 blogPostRepository.save(blogPost);
             }
+        }
+
+        List<BlogPost> posts = blogPostRepository.findAll();
+        List<User> users = userRepository.findAll();
+
+        for (BlogPost blogPost : posts) {
+            Comment[] comments = {new Comment(users.get(0), "This was a great post"),
+                    new Comment(users.get(1), "I agree. So much useful information"),
+                    new Comment(users.get(2), "Nah. It would've been better to use Go for this")};
+
+            blogPost.addComments(comments);
+            blogPostRepository.save(blogPost);
         }
     }
 }
