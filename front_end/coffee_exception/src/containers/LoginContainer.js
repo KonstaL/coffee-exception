@@ -11,6 +11,21 @@ import {
   Button,
   FormText
 } from 'reactstrap';
+import Styled from 'styled-components';
+
+const LoginButton = Styled.button`
+  border-radius: 0.25rem;
+  padding:6px 12px;  
+  background-color: rgb(47, 60, 71);
+  color:white;
+  border:none;
+  :focus {
+    outline:none;
+  }
+  :active {
+    background-color: rgb(64, 83, 96);
+  }
+`;
 
 export default class LoginContainer extends Component {
   testing(event) {
@@ -39,9 +54,9 @@ export default class LoginContainer extends Component {
             <FormText color="muted" style={{ marginBottom: 10 + 'px' }}>
               Don't have an account? <Link to="/">Register</Link>
             </FormText>
-            <Button onClick={this.testing} type="submit">
+            <LoginButton onClick={this.testing} type="submit">
               Login
-            </Button>
+            </LoginButton>
           </FormGroup>
         </Form>
       </Container>

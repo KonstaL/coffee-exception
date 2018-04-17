@@ -31,7 +31,7 @@ public class Seed implements CommandLineRunner {
                 ArrayList<String> items = new ArrayList<>();
 
                 //Make 1-5 paragraphs
-                for (int c = 0; c < (int) (Math.random() * 1 + 1); c++) {
+                for (int c = 0; c < (int) (Math.random() * 4 + 1); c++) {
                     items.add(lorem.getHtmlParagraphs(1, 1));
                 }
 

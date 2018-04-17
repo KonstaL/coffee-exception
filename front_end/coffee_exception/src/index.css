@@ -41,9 +41,18 @@ light brown: rgb(173, 154, 128)
 }
 .post-container {
   height: 100%;
-  padding-bottom: 50px;
+  padding-bottom: 20px;
+  margin-top: 10px;
 }
+
+.post-image {
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
 .post-header-container {
+  margin-top: 10px;
   overflow: hidden;
 }
 .post-header-container > p {
@@ -56,6 +65,7 @@ light brown: rgb(173, 154, 128)
 .post-header-container > h3 {
   float: left;
 }
+
 .post-paragraphs {
   display: block;
 }
@@ -81,9 +91,9 @@ light brown: rgb(173, 154, 128)
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 2px solid rgb(173, 154, 128);
+
   margin-bottom: 5px;
-  box-shadow: 1px 1px 2px 1px rgba(40, 40, 40, 0.7);
+  box-shadow: 2px 1px 2px 0px rgba(40, 40, 40, 0.7);
   overflow: hidden;
 }
 
@@ -114,8 +124,13 @@ html {
   background: #f3f3f3;
 }
 
-.post-row-additional {
+.post-row-narrow {
   max-width: 1100px;
+  margin: auto !important;
+}
+
+.post-row-narrower {
+  max-width: 900px;
   margin: auto !important;
 }
 

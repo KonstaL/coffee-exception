@@ -16,8 +16,7 @@ export class PostRow extends Component {
     ));
   }
 
-  createPosts(val) {
-    console.log(val);
+  createPosts(val, maxHeight) {
     let defaultColValues = {
       xs: 12,
       sm: 12,
@@ -39,6 +38,9 @@ export class PostRow extends Component {
         xl={result.xl}
       >
         <Post
+          height={maxHeight}
+          pic={index}
+          trim={true}
           title={post.title}
           date={post.date}
           body={this.convertStringToHtml(post.bodyItems)}
@@ -49,20 +51,20 @@ export class PostRow extends Component {
 
   render() {
     if (this.props.index < 2) {
-      return <Row>{this.createPosts({ lg: 12, xl: 6 })}</Row>;
+      return <Row>{this.createPosts({ lg: 12, xl: 6 }, 400)}</Row>;
     }
 
     if (this.props.index % 5 === 0 || this.props.index % 5 === 1) {
       return (
-        <Row className="post-row-additional">
-          {this.createPosts({ md: 12, lg: 6, xl: 6 })}
+        <Row className="post-row-narrow">
+          {this.createPosts({ md: 12, lg: 6, xl: 6 }, 300)}
         </Row>
       );
     }
 
     return (
-      <Row className="post-row-additional">
-        {this.createPosts({ md: 12, lg: 4, xl: 4 })}
+      <Row className="post-row-narrow">
+        {this.createPosts({ md: 12, lg: 4, xl: 4 }, 200)}
       </Row>
     );
   }
