@@ -12,6 +12,7 @@ const ImageDiv = Styled.div`
   background-size:cover;
   background-position: center;
   border: ${props => (props.border ? '1px solid rgb(230,230,230)' : 'none')};
+  text-align: center
 `;
 
 class ImageComponent extends Component {
@@ -23,7 +24,9 @@ class ImageComponent extends Component {
             height={this.props.height}
             width={this.props.width}
             img={this.props.image}
-          />
+          >
+            {this.props.children}
+          </ImageDiv>
         </Link>
       );
     } else {
@@ -33,7 +36,9 @@ class ImageComponent extends Component {
           width={this.props.width}
           img={this.props.image}
           border={this.props.border}
-        />
+        >
+          {this.props.children}
+        </ImageDiv>
       );
     }
   }
