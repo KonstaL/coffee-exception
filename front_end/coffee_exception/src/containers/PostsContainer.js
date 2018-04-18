@@ -30,6 +30,10 @@ class PostsContainer extends Component {
             height={400}
             key={post.id}
             title={post.title}
+            date={post.date}
+            author={post.username}
+            comments={post.comments}
+            likes={post.likes}
             body={this.convertStringToHtml(post.bodyItems)}
           />
         </Row>

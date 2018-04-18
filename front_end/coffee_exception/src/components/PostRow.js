@@ -41,8 +41,11 @@ export class PostRow extends Component {
           height={maxHeight}
           pic={index}
           trim={true}
+          author={post.username}
           title={post.title}
           date={post.date}
+          comments={post.comments}
+          likes={post.likes}
           body={this.convertStringToHtml(post.bodyItems)}
         />
       </Col>

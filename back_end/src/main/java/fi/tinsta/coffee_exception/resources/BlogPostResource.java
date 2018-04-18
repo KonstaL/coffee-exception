@@ -6,6 +6,7 @@ import fi.tinsta.coffee_exception.data.Comment;
 import fi.tinsta.coffee_exception.resources.ResourceWithEmbeddeds;
 import org.springframework.hateoas.core.Relation;
 
+import java.time.LocalDate;
 import java.util.List;
 
 // Resource class is NOT immutable, to simplify deserialisation using Jackson
@@ -17,17 +18,15 @@ public class BlogPostResource extends ResourceWithEmbeddeds {
     private final List<String> bodyItems;
     private final List<Comment> comments;
     private final String bannerUrl;
-
-
+    private final String username;
+    private final LocalDate date;
     private final Long postId;
 
     @JsonCreator
-    public BlogPostResource(@JsonProperty("id") long id,
-                            @JsonProperty("title") String title,
-                            @JsonProperty("bannerurl") String bannerUrl,
-                            @JsonProperty("likes") int likes,
-                            @JsonProperty("bodyitems") List<String> bodyItems,
-                            @JsonProperty("comments") List<Comment> comments) {
+    public BlogPostResource(@JsonProperty("id") long id, @JsonProperty("title") String title,
+            @JsonProperty("bannerurl") String bannerUrl, @JsonProperty("likes") int likes,
+            @JsonProperty("bodyitems") List<String> bodyItems, @JsonProperty("comments") List<Comment> comments,
+            @JsonProperty("username") String username, @JsonProperty("date") LocalDate date) {
         super();
         this.postId = id;
         this.likes = likes;
@@ -35,6 +34,8 @@ public class BlogPostResource extends ResourceWithEmbeddeds {
         this.bannerUrl = bannerUrl;
         this.bodyItems = bodyItems;
         this.comments = comments;
+        this.username = username;
+        this.date = date;
     }
 
     public String getTitle() {
@@ -59,5 +60,13 @@ public class BlogPostResource extends ResourceWithEmbeddeds {
 
     public String getBannerUrl() {
         return bannerUrl;
+    }
+
+    public String getUsername() {
+        return this.username;
+    }
+
+    public LocalDate getDate() {
+        return this.date;
     }
 }

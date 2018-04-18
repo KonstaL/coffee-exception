@@ -30,12 +30,8 @@ public class BlogPostResourceAssembler
 
     @Override
     protected BlogPostResource instantiateResource(BlogPost entity) {
-        return new BlogPostResource(entity.getId(),
-                entity.getTitle(),
-                entity.getBannerUrl(),
-                entity.getLikes(),
-                entity.getBodyItems(),
-                entity.getComments());
+        return new BlogPostResource(entity.getId(), entity.getTitle(), entity.getBannerUrl(), entity.getLikes(),
+                entity.getBodyItems(), entity.getComments(), entity.getUser().getUserName(), entity.getDate());
     }
 
     private BlogPostResource toBaseResource(BlogPost entity) {

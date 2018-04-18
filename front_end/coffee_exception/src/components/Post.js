@@ -56,6 +56,12 @@ export class Post extends Component {
     }
   }
 
+  createDate() {
+    return `${this.props.date.dayOfMonth}/${this.props.date.monthValue}/${
+      this.props.date.year
+    }`;
+  }
+
   render() {
     return (
       <div className="post-container">
@@ -65,7 +71,7 @@ export class Post extends Component {
         />
         <div className="post-header-container">
           <h3>{this.props.title}</h3>
-          <p>14/04/2018</p>
+          <p>{this.createDate()}</p>
         </div>
         <div className="post-paragraphs">{this.state.paragraphs}</div>
         <div className="post-footer-container">
@@ -74,16 +80,16 @@ export class Post extends Component {
               <img src={tempavatar} alt="avatar" />
             </div>
             <div className="profile-author-container">
-              <p>Timo McFarlane</p>
+              <p>{this.props.author}</p>
               <p className="post-author-subheader">The one and only</p>
             </div>
             <div className="post-some-icons">
               <i className="material-icons">chat_bubble</i>
-              <p>50</p>
+              <p>{this.props.comments.length}</p>
             </div>
             <div className="post-some-icons">
               <i className="material-icons">local_cafe</i>
-              <p>50</p>
+              <p>{this.props.likes}</p>
             </div>
           </div>
         </div>
