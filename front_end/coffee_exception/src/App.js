@@ -11,6 +11,7 @@ import LoginContainer from './containers/LoginContainer';
 import TrendingPostsContainer from './containers/TrendingPostsContainer';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import AboutUs from './components/AboutUs';
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
@@ -28,7 +29,7 @@ class App extends Component {
             <Row>
               <Switch>
                 <Route exact path="/" component={TrendingPostsContainer} />
-                <Route path="/about" render={() => <h1>about</h1>} />
+                <Route path="/about" component={AboutUs} />
                 <Route path="/login" component={LoginContainer} />
                 <Route path="/posts" component={PostsContainer} />
                 <Route path="/" render={() => <h1>404</h1>} />
