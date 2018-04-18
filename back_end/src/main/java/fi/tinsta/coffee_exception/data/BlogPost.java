@@ -11,7 +11,6 @@ import java.util.List;
 @Entity
 public class BlogPost extends AbstractPersistable<Long> {
 
-
     @Column(nullable = false)
     private String title;
 
