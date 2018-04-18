@@ -1,4 +1,4 @@
-package fi.tinsta.coffee_exception;
+package fi.tinsta.coffee_exception.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.hateoas.config.EnableEntityLinks;
