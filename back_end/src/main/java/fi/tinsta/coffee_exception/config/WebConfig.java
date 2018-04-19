@@ -11,16 +11,20 @@ import org.springframework.web.servlet.config.annotation.*;
 @EnableEntityLinks
 public class WebConfig implements WebMvcConfigurer {
 
+    private static final String[] CLASSPATH_RESOURCE_LOCATIONS = {
+            "classpath:/META-INF/resources/", "classpath:/resources/",
+            "classpath:/static/", "classpath:/public/" };
+
+
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**");
     }
 
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-
-            registry
-                    .addResourceHandler("/resources/**")
-                    .addResourceLocations("/resources/");
+        registry.addResourceHandler("/**")
+                .addResourceLocations(CLASSPATH_RESOURCE_LOCATIONS);
     }
 }
