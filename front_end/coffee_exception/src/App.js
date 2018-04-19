@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import promise from 'redux-promise';
 
 import reducers from './reducers';
+import PostContainer from './containers/PostContainer';
 import PostsContainer from './containers/PostsContainer';
 import { Container, Row, Col } from 'reactstrap';
 import LoginContainer from './containers/LoginContainer';
@@ -30,6 +31,10 @@ class App extends Component {
                 <Route exact path="/" component={TrendingPostsContainer} />
                 <Route path="/about" render={() => <h1>about</h1>} />
                 <Route path="/login" component={LoginContainer} />
+                <Route
+                  path="/posts/:id"
+                  render={props => <PostContainer id={props.match.params.id} />}
+                />
                 <Route path="/posts" component={PostsContainer} />
                 <Route path="/" render={() => <h1>404</h1>} />
               </Switch>

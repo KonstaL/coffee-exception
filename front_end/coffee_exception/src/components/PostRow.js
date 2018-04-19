@@ -26,11 +26,10 @@ export class PostRow extends Component {
     };
 
     let result = _.assign({}, defaultColValues, val);
-    //console.log(this.props.posts[0].title);
     return this.props.posts.map((post, index) => (
       <Col
         className="post-column"
-        key={post.id}
+        key={post.postId}
         xs={result.xs}
         sm={result.sm}
         md={result.md}
@@ -38,9 +37,11 @@ export class PostRow extends Component {
         xl={result.xl}
       >
         <Post
+          id={post.postId}
           height={maxHeight}
-          pic={index}
+          pic={post.bannerUrl}
           trim={true}
+          trimVal={250}
           author={post.username}
           title={post.title}
           date={post.date}
@@ -53,10 +54,6 @@ export class PostRow extends Component {
   }
 
   render() {
-    if (this.props.index < 2) {
-      return <Row>{this.createPosts({ lg: 12, xl: 6 }, 400)}</Row>;
-    }
-
     if (this.props.index % 5 === 0 || this.props.index % 5 === 1) {
       return (
         <Row className="post-row-narrow">
@@ -72,3 +69,23 @@ export class PostRow extends Component {
     );
   }
 }
+/*
+
+  ROW {
+    <COL xl="8">
+      <Post/>
+    </COL>
+    <COL xl="4">
+      <Post/>
+      <Post/>
+    </COL>
+  }
+     3
+     2 5
+     3
+     2 10
+     3
+     2 15
+     3
+     2 20
+*/

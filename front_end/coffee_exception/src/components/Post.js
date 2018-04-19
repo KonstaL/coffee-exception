@@ -4,6 +4,7 @@ import pic1 from '../assets/pic1.jpg';
 import pic2 from '../assets/pic2.jpg';
 import pic3 from '../assets/pic3.jpg';
 import Styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const PostImageContainer = Styled.div`
   overflow:hidden;
@@ -27,10 +28,15 @@ export class Post extends Component {
   }
 
   componentWillMount() {
-    if (this.props.trim != null && this.props.trim) {
+    if (
+      this.props.trim != null &&
+      this.props.trim &&
+      this.props.trimVal != null
+    ) {
       let trimmedParagraph = this.state.paragraphs[0].props.children;
-      if (trimmedParagraph.length > 250) {
-        trimmedParagraph = trimmedParagraph.substr(0, 250) + '...';
+      if (trimmedParagraph.length > this.props.trimVal) {
+        trimmedParagraph =
+          trimmedParagraph.substr(0, this.props.trimVal) + '...';
       }
       const para = <p>{trimmedParagraph}</p>;
       this.setState({
@@ -41,19 +47,9 @@ export class Post extends Component {
   }
 
   getImage() {
-    if (this.props.pic === 0) {
-      this.setState({
-        image: pic1
-      });
-    } else if (this.props.pic === 1) {
-      this.setState({
-        image: pic2
-      });
-    } else if (this.props.pic === 2) {
-      this.setState({
-        image: pic3
-      });
-    }
+    this.setState({
+      image: this.props.pic
+    });
   }
 
   createDate() {
@@ -65,10 +61,12 @@ export class Post extends Component {
   render() {
     return (
       <div className="post-container">
-        <PostImageContainer
-          maxHeight={this.props.height}
-          img={this.state.image}
-        />
+        <Link to={{ pathname: '/posts/' + this.props.id }}>
+          <PostImageContainer
+            maxHeight={this.props.height}
+            img={this.state.image}
+          />
+        </Link>
         <div className="post-header-container">
           <h3>{this.props.title}</h3>
           <p>{this.createDate()}</p>
