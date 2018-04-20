@@ -38,7 +38,8 @@ public class Seed implements CommandLineRunner {
                     items.add(lorem.getHtmlParagraphs(1, 1));
                 }
 
-                BlogPost blogPost = new BlogPost(lorem.getTitle(1), user, "https://picsum.photos/800/500/?random", items);
+                BlogPost blogPost = new BlogPost(lorem.getTitle(1), user, "https://picsum.photos/800/500/?random",
+                        items);
 
                 blogPostRepository.save(blogPost);
             }
@@ -48,9 +49,9 @@ public class Seed implements CommandLineRunner {
         List<User> users = userRepository.findAll();
 
         for (BlogPost blogPost : posts) {
-            Comment[] comments = {new Comment(users.get(0), "This was a great post"),
+            Comment[] comments = { new Comment(users.get(0), "This was a great post"),
                     new Comment(users.get(1), "I agree. So much useful information"),
-                    new Comment(users.get(2), "Nah. It would've been better to use Go for this")};
+                    new Comment(users.get(2), "Nah. It would've been better to use Go for this") };
 
             blogPost.addComments(comments);
             blogPostRepository.save(blogPost);

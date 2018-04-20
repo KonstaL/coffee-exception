@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Card, Row, Col, Badge, Container } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import Styled from 'styled-components';
-import templogo from '../assets/templogo.PNG';
+import templogo from '../assets/templogo.png';
 
 const HeaderDiv = Styled.div`
   margin-right: -15px;
@@ -56,7 +56,7 @@ class Header extends Component {
     return (
       <HeaderDiv color={this.props.color}>
         <Container>
-          <Row>
+          <Row style={{ maxWidth: 1200 + 'px' }}>
             <Col md="4" xs="12">
               <Link to="/">
                 <LogoImg src={templogo} />
