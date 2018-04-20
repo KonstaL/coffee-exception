@@ -30,7 +30,7 @@ class App extends Component {
             </Row>
             <Row>
               <Switch>
-                <Route path="/about" component={AboutUsContainer} />
+                <Route path="/about" cocmponent={AboutUsContainer} />
                 <Route path="/login" component={LoginContainer} />
                 <Route path="/new" component={AddPostContainer} />
                 <Route path="/posts" component={PostsContainer} />
