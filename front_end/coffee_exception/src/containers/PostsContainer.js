@@ -27,10 +27,16 @@ class PostsContainer extends Component {
       return this.props.posts._embedded.blogposts.map(post => (
         <Row className="post-row-narrower">
           <Post
-            pic={Math.floor(Math.random() * (2 - 0 + 1)) + 0}
+            pic={post.bannerUrl}
             height={400}
-            key={post.id}
+            trim={true}
+            key={post.postId}
+            id={post.postId}
             title={post.title}
+            date={post.date}
+            author={post.username}
+            comments={post.comments}
+            likes={post.likes}
             body={this.convertStringToHtml(post.bodyItems)}
           />
         </Row>

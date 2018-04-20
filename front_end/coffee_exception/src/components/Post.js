@@ -4,6 +4,7 @@ import pic1 from '../assets/pic1.jpg';
 import pic2 from '../assets/pic2.jpg';
 import pic3 from '../assets/pic3.jpg';
 import Styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const PostImageContainer = Styled.div`
   overflow:hidden;
@@ -27,10 +28,15 @@ export class Post extends Component {
   }
 
   componentWillMount() {
-    if (this.props.trim != null && this.props.trim) {
+    if (
+      this.props.trim != null &&
+      this.props.trim &&
+      this.props.trimVal != null
+    ) {
       let trimmedParagraph = this.state.paragraphs[0].props.children;
-      if (trimmedParagraph.length > 250) {
-        trimmedParagraph = trimmedParagraph.substr(0, 250) + '...';
+      if (trimmedParagraph.length > this.props.trimVal) {
+        trimmedParagraph =
+          trimmedParagraph.substr(0, this.props.trimVal) + '...';
       }
       const para = <p>{trimmedParagraph}</p>;
       this.setState({
@@ -41,31 +47,29 @@ export class Post extends Component {
   }
 
   getImage() {
-    if (this.props.pic === 0) {
-      this.setState({
-        image: pic1
-      });
-    } else if (this.props.pic === 1) {
-      this.setState({
-        image: pic2
-      });
-    } else if (this.props.pic === 2) {
-      this.setState({
-        image: pic3
-      });
-    }
+    this.setState({
+      image: this.props.pic
+    });
+  }
+
+  createDate() {
+    return `${this.props.date.dayOfMonth}/${this.props.date.monthValue}/${
+      this.props.date.year
+    }`;
   }
 
   render() {
     return (
       <div className="post-container">
-        <PostImageContainer
-          maxHeight={this.props.height}
-          img={this.state.image}
-        />
+        <Link to={{ pathname: '/posts/' + this.props.id }}>
+          <PostImageContainer
+            maxHeight={this.props.height}
+            img={this.state.image}
+          />
+        </Link>
         <div className="post-header-container">
           <h3>{this.props.title}</h3>
-          <p>14/04/2018</p>
+          <p>{this.createDate()}</p>
         </div>
         <div className="post-paragraphs">{this.state.paragraphs}</div>
         <div className="post-footer-container">
@@ -74,16 +78,16 @@ export class Post extends Component {
               <img src={tempavatar} alt="avatar" />
             </div>
             <div className="profile-author-container">
-              <p>Timo McFarlane</p>
+              <p>{this.props.author}</p>
               <p className="post-author-subheader">The one and only</p>
             </div>
             <div className="post-some-icons">
               <i className="material-icons">chat_bubble</i>
-              <p>50</p>
+              <p>{this.props.comments.length}</p>
             </div>
             <div className="post-some-icons">
               <i className="material-icons">local_cafe</i>
-              <p>50</p>
+              <p>{this.props.likes}</p>
             </div>
           </div>
         </div>
