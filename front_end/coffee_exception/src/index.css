@@ -135,5 +135,52 @@ html {
   margin: auto !important;
 }
 
+.comment-container {
+  overflow: hidden;
+}
+
+.comment-user-avatar-container {
+  height: 100%;
+  margin-right: 10px;
+  float: left;
+}
+.comments > ul {
+  padding-left: 0;
+}
+.comments-header {
+  margin-top: 10px;
+}
+.comment {
+  width: 100%;
+  overflow: hidden;
+}
+.comment-footer {
+  width: 100%;
+  overflow: hidden;
+  min-height: 20px;
+}
+.comment-footer > div {
+  float: right;
+}
+.comment-footer > div > * {
+  display: inline;
+}
+.comment-footer > div > i {
+  font-size: 36px;
+  vertical-align: middle;
+  color: rgb(130, 156, 174);
+}
+.comment-footer > div > p {
+  display: inline-block;
+  line-height: 36px;
+  margin: 0;
+}
+.comment-content {
+  height: 100%;
+  float: left;
+}
+.comment-content > p {
+  margin: 0;
+}
 @media (min-width: 992px) {
 }

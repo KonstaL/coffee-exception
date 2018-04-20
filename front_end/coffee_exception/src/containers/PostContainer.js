@@ -3,6 +3,7 @@ import { fetchPost } from '../actions/fetchPost';
 import { connect } from 'react-redux';
 import { Container, Row } from 'reactstrap';
 import { Post } from '../components/Post';
+import { PostComments } from '../components/PostComments';
 import _ from 'lodash';
 
 class PostContainer extends Component {
@@ -39,6 +40,7 @@ class PostContainer extends Component {
             likes={this.props.post.likes}
             body={this.convertStringToHtml(this.props.post.bodyItems)}
           />
+          <PostComments comments={this.props.post.comments} />
         </Container>
       );
     }
