@@ -25,7 +25,7 @@ public class Seed implements CommandLineRunner {
 
         //makes 10 users
         for (int i = 0; i < 10; i++) {
-            User user = new User(lorem.getName());
+            User user = new User(lorem.getName(), "password");
             user.setImageUrl("https://randomuser.me/api/portraits/men/" + i + ".jpg");
             userRepository.save(user);
 

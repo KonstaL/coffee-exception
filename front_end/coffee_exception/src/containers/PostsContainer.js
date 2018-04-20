@@ -3,6 +3,7 @@ import { fetchPosts } from '../actions/fetchPosts';
 import { connect } from 'react-redux';
 import { Container, Row } from 'reactstrap';
 import { Post } from '../components/Post';
+import _ from 'lodash';
 
 class PostsContainer extends Component {
   componentDidMount() {
