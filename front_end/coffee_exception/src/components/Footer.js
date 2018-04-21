@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Card, Row, Col, Badge, Container } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import Styled from 'styled-components';
-import templogo from '../assets/templogo.PNG';
 
 const FooterDiv = Styled.div`
   margin-right: -15px;
