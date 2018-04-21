@@ -1,6 +1,6 @@
 export const FETCH_POST = 'fetch_post';
 
-const ROOT_URL = 'http://localhost:8080/api/posts/';
+const ROOT_URL = 'http://localhost:8080/api/posts/?projection=inline-user';
 
 export function fetchPost(id) {
   const request = fetch(ROOT_URL + id, {

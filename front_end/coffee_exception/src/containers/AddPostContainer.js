@@ -25,7 +25,6 @@ const Input = Styled.input`
   margin: 0px 0px 15px 0px;
   border: none;
   border-bottom: 1px solid gray;
-
 `;
 
 const H1 = Styled.h1`
@@ -62,24 +61,6 @@ export default class AddPostContainer extends Component {
     this.codeBlocks = new Array();
   }
 
-  handleChange(e) {
-    switch (e.target.name) {
-      case 'preview-text-input':
-        this.setState({ previewText: e.target.value });
-        break;
-      case 'title-input':
-        this.setState({ title: e.target.value });
-        break;
-      case 'editor-input':
-        this.setState({
-          editorText: e.target.value,
-          editorHeight: +e.target.scrollHeight
-        });
-
-        break;
-    }
-  }
-
   componentDidUpdate() {
     let blocks = document.querySelectorAll('code');
 
@@ -99,6 +80,45 @@ export default class AddPostContainer extends Component {
 
       this.codeBlocks = blocks;
     }
+  }
+
+  handleChange(e) {
+    switch (e.target.name) {
+      case 'preview-text-input':
+        this.setState({ previewText: e.target.value });
+        break;
+      case 'title-input':
+        this.setState({ title: e.target.value });
+        break;
+      case 'editor-input':
+        this.setState({
+          editorText: e.target.value,
+          editorHeight: +e.target.scrollHeight
+        });
+        break;
+    }
+  }
+
+  /*
+    Hei Timo, tee tää redux tyylisesti, en ite just nyt jaksa opetella
+    t. Lauantain Konsta
+  */
+  postBlogpost() {
+    fetch('http://localhost:8080/posts/', {
+      method: 'POST',
+      headers: new Headers({ 'content-type': 'application/json' }),
+      body: JSON.stringify({
+        title: this.state.title,
+        previewText: this.state.previewText,
+        bodyText: this.state.editorText
+      })
+    })
+      .then(res => res.json())
+      .then(res => console.log(res))
+      .catch(err => console.log('error: ', err));
+
+    // React router redirect
+    //this.props.router.push('/');
   }
 
   //
@@ -157,7 +177,9 @@ export default class AddPostContainer extends Component {
               'border-top': '1px solid lightgray'
             }}
           >
-            <Button color="primary">Post it!</Button>
+            <Button color="primary" onClick={this.postBlogpost.bind(this)}>
+              Post it!
+            </Button>
           </Col>
         </Row>
         <Row>
