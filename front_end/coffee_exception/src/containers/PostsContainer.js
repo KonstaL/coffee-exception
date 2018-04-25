@@ -23,7 +23,11 @@ class PostsContainer extends Component {
   }
 
   renderListFromData() {
-    if (Object.getOwnPropertyNames(this.props.posts).length > 0) {
+    console.log(this.props.posts);
+    if (
+      Object.getOwnPropertyNames(this.props.posts).length > 0 &&
+      this.props.posts._embedded != undefined
+    ) {
       return this.props.posts._embedded.blogposts.map(post => (
         <Row className="post-row-narrower">
           <Post
