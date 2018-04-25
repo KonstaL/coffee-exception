@@ -182,5 +182,23 @@ html {
 .comment-content > p {
   margin: 0;
 }
+
+.office-post-utils-container {
+  width: 100%;
+}
+.office-post-action-container {
+  margin: auto;
+  overflow: hidden;
+  max-width: 220px;
+}
+
+.office-post-action-container > div {
+  float: left;
+  width: 100px;
+  padding: 10px;
+  border: 1px solid;
+  margin: 5px;
+  text-align: center;
+}
 @media (min-width: 992px) {
 }

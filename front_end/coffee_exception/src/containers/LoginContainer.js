@@ -51,7 +51,7 @@ export class LoginContainer extends Component {
           <FormGroup>
             <Label for="username">Username</Label>
             <Input
-              type="text"
+              type="username"
               name="username"
               id="username"
               minLength="3"

@@ -13,6 +13,7 @@ import TrendingPostsContainer from './containers/TrendingPostsContainer';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import AboutUsContainer from './containers/AboutUsContainer';
+import BackOfficeContainer from './containers/BackOfficeContainer';
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
@@ -32,6 +33,7 @@ class App extends Component {
                 <Route exact path="/" component={TrendingPostsContainer} />
                 <Route path="/about" component={AboutUsContainer} />
                 <Route path="/login" component={LoginContainer} />
+                <Route path="/backoffice" component={BackOfficeContainer} />
                 <Route
                   path="/posts/:id"
                   render={props => <PostContainer id={props.match.params.id} />}

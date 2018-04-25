@@ -1,6 +1,6 @@
 export const LOGIN = 'login';
 
-const ROOT_URL = 'http://localhost:8080/authenticateTheUser/';
+const ROOT_URL = 'http://localhost:8080/login';
 
 export function login(data) {
   const request = fetch(ROOT_URL, {
@@ -15,6 +15,7 @@ export function login(data) {
     })
     .catch(err => console.log(err));
 
+  console.log(request);
   return {
     type: LOGIN,
     payload: request
