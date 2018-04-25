@@ -19,7 +19,7 @@ export class TopPosts extends Component {
       <Row className="post-row-narrow">
         <Col lg="12" xl="8">
           <Post
-            id={this.props.data[0].postId}
+            id={this.props.data[0].id}
             height={460}
             trim={true}
             trimVal={550}
@@ -34,7 +34,7 @@ export class TopPosts extends Component {
         </Col>
         <Col lg="12" xl="4">
           <Post
-            id={this.props.data[1].postId}
+            id={this.props.data[1].id}
             height={160}
             pic={this.props.data[1].bannerUrl}
             trim={true}
@@ -47,7 +47,7 @@ export class TopPosts extends Component {
             body={this.convertStringToHtml(this.props.data[1].bodyItems)}
           />
           <Post
-            id={this.props.data[2].postId}
+            id={this.props.data[2].id}
             height={160}
             pic={this.props.data[2].bannerUrl}
             trim={true}

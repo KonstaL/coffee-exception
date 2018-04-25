@@ -30,7 +30,7 @@ class PostContainer extends Component {
       return (
         <Container style={{ maxWidth: 800 + 'px' }}>
           <Post
-            id={this.props.post.postId}
+            id={this.props.post.id}
             height={400}
             pic={this.props.post.bannerUrl}
             author={this.props.post.username}

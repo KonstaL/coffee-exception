@@ -14,7 +14,7 @@ export class PostComments extends Component {
               </div>
             </div>
             <div className="comment-content">
-              <div className="comment-author">Comment Author placeholder</div>
+              <div className="comment-author">{}</div>
               <p>{comment.text}</p>
             </div>
           </div>

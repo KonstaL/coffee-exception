@@ -30,8 +30,8 @@ class PostsContainer extends Component {
             pic={post.bannerUrl}
             height={400}
             trim={true}
-            key={post.postId}
-            id={post.postId}
+            key={post.id}
+            id={post.id}
             title={post.title}
             date={post.date}
             author={post.username}

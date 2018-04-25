@@ -1,6 +1,6 @@
 export const FETCH_TRENDING_POSTS = 'fetch_trending_posts';
 
-const ROOT_URL = 'http://localhost:8080/api/posts/?projection=inline-user';
+const ROOT_URL = 'http://localhost:8080/api/posts/';
 
 export function fetchTrendingPosts() {
   const request = fetch(ROOT_URL, {

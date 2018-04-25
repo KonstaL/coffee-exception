@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import {
   Form,
   FormGroup,
@@ -11,6 +10,8 @@ import {
   Button,
   FormText
 } from 'reactstrap';
+import { login } from '../actions/login';
+import { connect } from 'react-redux';
 import Styled from 'styled-components';
 
 const LoginButton = Styled.button`
@@ -27,12 +28,19 @@ const LoginButton = Styled.button`
   }
 `;
 
-export default class LoginContainer extends Component {
+export class LoginContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.testing = this.testing.bind(this);
+  }
+
   testing(event) {
     event.preventDefault();
     document.getElementById('login-form').classList.add('was-validated');
-    console.log(document.getElementById('username').value);
-    console.log(document.getElementById('password').value);
+    this.props.login({
+      username: document.getElementById('username').value,
+      password: document.getElementById('password').value
+    });
   }
 
   render() {
@@ -42,12 +50,24 @@ export default class LoginContainer extends Component {
           <FormFeedback valid>Error</FormFeedback>
           <FormGroup>
             <Label for="username">Username</Label>
-            <Input type="text" id="username" minLength="3" required />
+            <Input
+              type="text"
+              name="username"
+              id="username"
+              minLength="3"
+              required
+            />
             <FormFeedback invalid>Please insert username</FormFeedback>
           </FormGroup>
           <FormGroup>
             <Label for="password">Password</Label>
-            <Input type="password" id="password" minLength="3" required />
+            <Input
+              type="password"
+              name="password"
+              id="password"
+              minLength="3"
+              required
+            />
             <FormFeedback invalid>Please insert password</FormFeedback>
           </FormGroup>
           <FormGroup>
@@ -63,3 +83,8 @@ export default class LoginContainer extends Component {
     );
   }
 }
+function mapStateToProps(state) {
+  return { login: state.login };
+}
+
+export default connect(mapStateToProps, { login })(LoginContainer);

@@ -29,7 +29,7 @@ export class PostRow extends Component {
     return this.props.posts.map((post, index) => (
       <Col
         className="post-column"
-        key={post.postId}
+        key={post.id}
         xs={result.xs}
         sm={result.sm}
         md={result.md}
@@ -37,7 +37,7 @@ export class PostRow extends Component {
         xl={result.xl}
       >
         <Post
-          id={post.postId}
+          id={post.id}
           height={maxHeight}
           pic={post.bannerUrl}
           trim={true}
