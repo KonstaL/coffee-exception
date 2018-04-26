@@ -58,10 +58,10 @@ public class Seed implements CommandLineRunner {
         }
 
         System.out.println("REST API");
-        System.out.println("/api/posts/");
-        System.out.println("/api/posts/?projection=inline-user");
-        System.out.println("/api/posts/2");
-        System.out.println("/api/users/");
-        System.out.println("/api/users/2");
+        System.out.println("http://localhost:8080/api/posts/");
+        System.out.println("http://localhost:8080/api/posts/?projection=inline-user");
+        System.out.println("http://localhost:8080/api/posts/2?projection=inline-user");
+        System.out.println("http://localhost:8080/api/users/");
+        System.out.println("http://localhost:8080/api/users/2");
     }
 }
