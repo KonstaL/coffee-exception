@@ -196,9 +196,16 @@ html {
   float: left;
   width: 100px;
   padding: 10px;
-  border: 1px solid;
+  border: 1px solid rgb(130, 156, 174);
   margin: 5px;
+  color: rgb(130, 156, 174);
   text-align: center;
+  cursor: pointer;
+}
+
+.office-post-action-container > div:hover {
+  color: rgb(45, 66, 82);
+  border: 1px solid rgb(45, 66, 82);
 }
 @media (min-width: 992px) {
 }

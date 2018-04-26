@@ -38,7 +38,7 @@ class PostsContainer extends Component {
             id={post.id}
             title={post.title}
             date={post.date}
-            author={post.username}
+            author={post.user.username}
             comments={post.comments}
             likes={post.likes}
             body={this.convertStringToHtml(post.bodyItems)}

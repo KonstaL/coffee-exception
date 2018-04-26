@@ -24,7 +24,7 @@ export class TopPosts extends Component {
             trim={true}
             trimVal={550}
             pic={this.props.data[0].bannerUrl}
-            author={this.props.data[0].username}
+            author={this.props.data[0].user.username}
             title={this.props.data[0].title}
             date={this.props.data[0].date}
             comments={this.props.data[0].comments}
@@ -39,7 +39,7 @@ export class TopPosts extends Component {
             pic={this.props.data[1].bannerUrl}
             trim={true}
             trimVal={100}
-            author={this.props.data[1].username}
+            author={this.props.data[1].user.username}
             title={this.props.data[1].title}
             date={this.props.data[1].date}
             comments={this.props.data[1].comments}
@@ -52,7 +52,7 @@ export class TopPosts extends Component {
             pic={this.props.data[2].bannerUrl}
             trim={true}
             trimVal={100}
-            author={this.props.data[2].username}
+            author={this.props.data[2].user.username}
             title={this.props.data[2].title}
             date={this.props.data[2].date}
             comments={this.props.data[2].comments}

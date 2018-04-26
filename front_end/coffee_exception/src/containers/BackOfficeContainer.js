@@ -33,7 +33,7 @@ export class BackOfficeContainer extends Component {
             id={post.id}
             trim={true}
             trimVal={100}
-            author={post.username}
+            author={post.user.username}
             title={post.title}
             date={post.date}
             comments={post.comments}

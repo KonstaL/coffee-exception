@@ -2,15 +2,13 @@ package fi.tinsta.coffee_exception.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.jpa.domain.AbstractPersistable;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 public class User extends AbstractPersistable<Long> {
-    public static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
+    //public static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
 
     @Column(nullable = false, unique = true)
     private String username;
@@ -24,7 +22,7 @@ public class User extends AbstractPersistable<Long> {
     private List<BlogPost> blogPosts;
 
     public User(String username, String password) {
-        setUsername( username);
+        setUsername(username);
         setPassword(password);
     }
 
@@ -60,6 +58,7 @@ public class User extends AbstractPersistable<Long> {
     }
 
     public void setPassword(String password) {
-        this.password = PASSWORD_ENCODER.encode(password);
+        this.password = password;
+        //this.password = PASSWORD_ENCODER.encode(password);
     }
 }

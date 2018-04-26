@@ -33,7 +33,7 @@ class PostContainer extends Component {
             id={this.props.post.id}
             height={400}
             pic={this.props.post.bannerUrl}
-            author={this.props.post.username}
+            author={this.props.post.user.username}
             title={this.props.post.title}
             date={this.props.post.date}
             comments={this.props.post.comments}

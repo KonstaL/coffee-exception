@@ -42,7 +42,7 @@ export class PostRow extends Component {
           pic={post.bannerUrl}
           trim={true}
           trimVal={250}
-          author={post.username}
+          author={post.user.username}
           title={post.title}
           date={post.date}
           comments={post.comments}

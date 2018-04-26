@@ -56,5 +56,12 @@ public class Seed implements CommandLineRunner {
             blogPost.addComments(comments);
             blogPostRepository.save(blogPost);
         }
+
+        System.out.println("REST API");
+        System.out.println("/api/posts/");
+        System.out.println("/api/posts/?projection=inline-user");
+        System.out.println("/api/posts/2");
+        System.out.println("/api/users/");
+        System.out.println("/api/users/2");
     }
 }

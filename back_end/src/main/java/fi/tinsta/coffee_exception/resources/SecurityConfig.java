@@ -1,4 +1,4 @@
-package fi.tinsta.coffee_exception.resources;
+/*package fi.tinsta.coffee_exception.resources;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -19,18 +19,11 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
-@EnableWebSecurity
+//@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().authorizeRequests().anyRequest().permitAll();
-    }
-
-    @Autowired
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        UserBuilder users = User.withDefaultPasswordEncoder();
-
-        auth.inMemoryAuthentication().withUser(users.username("user").password("password").roles("USER"));
     }
 
     @Bean
@@ -51,4 +44,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return source;
     }
 }
-/**/
+*/
