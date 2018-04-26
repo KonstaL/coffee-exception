@@ -31,15 +31,15 @@ class App extends Component {
             </Row>
             <Row>
               <Switch>
-                <Route path="/about" cocmponent={AboutUsContainer} />
+                <Route path="/about" component={AboutUsContainer} />
                 <Route path="/login" component={LoginContainer} />
                 <Route path="/backoffice" component={BackOfficeContainer} />
                 <Route path="/new" component={AddPostContainer} />
-                <Route path="/posts" component={PostsContainer} />
                 <Route
                   path="/posts/:id"
                   render={props => <PostContainer id={props.match.params.id} />}
                 />
+                <Route path="/posts" component={PostsContainer} />
                 <Route exact path="/" component={TrendingPostsContainer} />
                 <Route path="/" render={() => <h1>404</h1>} />
               </Switch>
