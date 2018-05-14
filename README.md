@@ -4,13 +4,5 @@ Coffee exception is a React and Spring-boot based blogging site made for a webde
 
 ## How to use
 
-##### Back-end
-
-`cd backend`
-`mvn compile`
-`mvn spring-boot:run`
-
-#### Front-end
-
-`cd front-end`
-`npm start`
+Download a release jar (newest is v0.3) and run it with `java -jar <jarname>.jar`
+The server starts at port 8080
